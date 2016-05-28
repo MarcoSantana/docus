@@ -1,0 +1,24 @@
+<%= form_for @document, layout: :basic  do |f| %>
+        <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+    <fieldset class="form-group">
+      <%= f.select :certificate, options_for_select(Document.certificates.map { |s| [ s[0].humanize, s[0] ] }),  class: 'form-control' %>
+      <%= f.text_field :description, label: 'Descripción', placeholder: 'Descripción de este documento' %>
+      <%= f.date_field :emission_date, label:'Fecha de emisión' %>
+      <%= f.file_field :image %>
+    </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

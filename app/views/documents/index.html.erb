@@ -1,0 +1,27 @@
+<div class="container m-t-3">
+  <h1>Listado de documentos</h1>
+
+  <div class="card-group">
+    <div class="row row-eq-height"><!-- row -->
+        <% @documents.each do |document| %>
+          <div class="col-md-3 p-x-1">
+            <div class="card">
+              <%= image_tag document.image.url(:medium), class: 'card-img-top img-fluid img-thumbnail' %>
+              <div class="card-block">
+                <h4 class="card-title"><%= document.to_s %></h4>
+                <p class="card-text"><%= document.description %></p>
+                <p class="card-text"><small class="text-muted">Emitido <%= document.emission_date %></small></p>
+              </div>
+              <div class="card-block">
+                <%= link_to 'Ver', document %>
+                <%= link_to 'Editar', edit_document_path(document) %>
+                <%= link_to 'Borrar', document, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+          </div><!--/col-->
+        <% end %>
+    </div><!-- /row -->
+  </div>
+
+  <%= link_to 'Crear un nuevo documento', new_document_path, class: 'btn btn-info' %>
+</div>

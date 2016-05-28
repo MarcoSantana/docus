@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="col-md-3 col-md-offset-4 m-t-3">
+    <div class="card">
+      <%= image_tag @document.image.url, class: 'card-img-top img-fluid' %>
+      <div class="card-block">
+        <h4 class="card-title"><small>
+          <span class="fa-stack fa-lg ">
+            <i class="fa fa-file-o fa-stack-2x"></i>
+            <i class="fa fa-certificate fa-stack-1x fa-1x text-warning"></i>
+          </span>
+        </small><%= @document.to_s %></h4>
+        <p class="card-text"><%= @document.description %></p>
+        <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
+        <div class="card-block">
+          <%= link_to 'Edit', edit_document_path(@document), class:'' %>
+          <%= link_to 'Back', documents_path, class:''%>
+          <%= modal title: 'Borrar', size: :large, id: 'modal', button: {context: :danger} do %>
+              <div class="modal-body">¿Desea borrar el documento?
+                <div class="card-block">
+                  <h4 class="card-title"><%= @document.to_s %></h4>
+                  <p class="card-text"><%= @document.description %></p>
+                  <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
+                  <p><%= image_tag @document.image.url, class: 'card-img-top img-fluid' %></p>
+                </div>
+              </div>
+              <div class="modal-footer"><%= button_to 'Eliminar documento', @document, :method=>:delete, :class=>:destroy, class: 'btn btn-danger'  %></div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
