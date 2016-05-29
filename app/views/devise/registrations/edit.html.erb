@@ -1,11 +1,19 @@
 <div class="container m-t-3">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  <%= image_tag current_user.avatar.url, class: 'card-img-top img-fluid center-block' %>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, layout: :basic) do |f| %>
     <%= f.text_field :name, label:'Nombre' %>
     <%= f.text_field :name, label:'Apellidos' %>
-    <%= f.select :university %>
-    <div class="field">
+      <% University.levels.each do |level| %>
+      <%= level[0].humanize %>
+          <div class="field form-control">
+            <%= f.label 'Universidad formativa' %>
+            <%= f.collection_select :universities, University.where(level: level[1]), :id, (:name_with_level),  class: 'form-control' %>
+          </div>
+      <% end %>
+
+      <div class="field">
       <%= f.email_field :email, autofocus: true %>
     </div>
 

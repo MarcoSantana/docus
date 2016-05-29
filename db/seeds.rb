@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-  500.times do |i|
+  50.times do
     u = User.new
     u.name =  Faker::Name.first_name
     u.last_name = Faker::Name.last_name
@@ -13,15 +13,28 @@
     u.password= 'password1234'
     u.password_confirmation = 'password1234'
     u.role = 'especialista'
+    link = UiFaces.face
+    d.image = File.new(link)
+    University.levels.each do |level|
+      uni = University.where(level: level[1]).order('RANDOM()').limit(1)
+    end
+    u.universities<<uni
+
 
     u.save
-    100.times do |j|
+    100.times do
       d = Document.new
       d.user_id = u.id
       d.certificate = Document.certificates.map { |s| s[0]  }.sample
-      d.description = Faker::Lorem.paragraphs
+      d.description = Faker::Lorem.characters(char_count = 254)
       d.emission_date = Time.now
-      #link = UiFaces.face
-      #d.image = File.new(link)
+      #d.image = File.new('/public/images/document_icon_default.png')
+      d.save
     end
   end
+100.times do
+  uni = University.new
+  uni.name = Faker::University.name
+  uni.level = University.levels.map { |s| s[0] }.sample
+  uni.save
+end

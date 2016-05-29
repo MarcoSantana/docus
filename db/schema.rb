@@ -11,19 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528213101) do
+ActiveRecord::Schema.define(version: 20160529190047) do
 
   create_table "documents", force: :cascade do |t|
     t.integer  "certificate",        limit: 4
     t.string   "description",        limit: 255
     t.date     "emission_date"
     t.integer  "user_id",            limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
+    t.integer  "value",              limit: 4,   default: 0
+    t.date     "caducity"
   end
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
@@ -38,11 +40,11 @@ ActiveRecord::Schema.define(version: 20160528213101) do
   end
 
   create_table "entities_users", force: :cascade do |t|
-    t.integer "user_id",    limit: 4
-    t.integer "entitiy_id", limit: 4
+    t.integer "user_id",   limit: 4
+    t.integer "entity_id", limit: 4
   end
 
-  add_index "entities_users", ["entitiy_id"], name: "index_entities_users_on_entitiy_id", using: :btree
+  add_index "entities_users", ["entity_id"], name: "index_entities_users_on_entity_id", using: :btree
   add_index "entities_users", ["user_id"], name: "index_entities_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

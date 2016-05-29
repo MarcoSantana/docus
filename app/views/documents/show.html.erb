@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-md-3 col-md-offset-4 m-t-3">
+  <div class="col-md-4 col-md-offset-4 m-t-3">
     <div class="card">
       <%= image_tag @document.image.url, class: 'card-img-top img-fluid' %>
       <div class="card-block">
@@ -18,7 +18,8 @@
               <div class="modal-body">¿Desea borrar el documento?
                 <div class="card-block">
                   <h4 class="card-title"><%= @document.to_s %></h4>
-                  <p class="card-text"><%= @document.description %></p>
+                  <div class="card"><%= @document.description %></div>
+                  <p class="card-text"></p>
                   <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
                   <p><%= image_tag @document.image.url, class: 'card-img-top img-fluid' %></p>
                 </div>

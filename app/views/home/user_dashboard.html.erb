@@ -4,33 +4,38 @@
 
     <div class="col-md-4 m-x-0 p-r-0">
       <div class="card-block">
-          <div class="card">
-              <%= image_tag current_user.avatar.url, class: 'card-img-top img-fluid center-block' %>
-              <%= image_tag current_user.avatar.url, class: 'card-img-top img-fluid' %>
-              <%= image_tag(current_user.avatar.url(:original)) %>
-              <div class="card-block">
-                <h4 class="card-title text-xs-center"><%= current_user.name %> <br /><small class="muted"><%= current_user.last_name %></small> </h4>
-              </div>
+        <div class="card">
+          <%= image_tag current_user.avatar.url, class: 'card-img-top img-fluid center-block' %>
+          <div class="card-block">
+            <h4 class="card-title text-xs-center"><%= current_user.name %> <br /><small class="muted"><%= current_user.last_name %></small> </h4>
+          </div>
+          <div class="card-block text-xs-center">
+            <%= link_to 'Cambiar mis datos', edit_user_registration_path, class: 'card-link btn btn-info' %>
           </div>
         </div>
+      </div>
     </div>
 
     <div class="col-md-8 p-l-0 m-x-0">
       <div class="card-block">
         <div class="card">
-          <h4 class="card-title">Nombre</h4>
+          <h4 class="card-title hidden-md-down">Nombre</h4>
           <p class="card-text"><%= icon :user_md, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.compound_name %></p>
         </div>
         <div class="card">
-          <h4 class="card-title">Correo Electrrónico</h4>
+          <h4 class="card-title hidden-md-down">Correo Electrrónico</h4>
           <p class="card-text"><%= icon :envelope, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.email %></p>
         </div>
         <div class="card">
-          <h4 class="card-title">Universidad de formacion [nivel]</h4>
-          <p class="card-text"><%= icon :university, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %></p>
+          <% current_user.universities.all.each do |uni| %>
+            <h4 class="card-title hidden-md-down">Universidad de formacion <%= uni.level.humanize %></h4>
+            <%= uni.name %>
+
+            <p class="card-text"><%= icon :university, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><small class="muted"><%= uni.level.humanize %></small></p>
+        <% end %>
         </div>
         <div class="card">
-          <h4 class="card-title">Hospital de formación [nivel]</h4>
+          <h4 class="card-title hidden-md-down">Hospital de formación [nivel]</h4>
           <p class="card-text"><%= icon :hospital_o, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.email %></p>
         </div>
 
