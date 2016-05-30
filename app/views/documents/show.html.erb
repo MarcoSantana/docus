@@ -12,8 +12,8 @@
         <p class="card-text"><%= @document.description %></p>
         <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
         <div class="card-block">
-          <%= link_to 'Edit', edit_document_path(@document), class:'' %>
-          <%= link_to 'Back', documents_path, class:''%>
+          <%= link_to 'Editar', edit_document_path(@document), class:'' %>
+          <%= link_to 'Regresar', documents_path, class:''%>
           <%= modal title: 'Borrar', size: :large, id: 'modal', button: {context: :danger} do %>
               <div class="modal-body">¿Desea borrar el documento?
                 <div class="card-block">
@@ -32,4 +32,3 @@
     </div>
   </div>
 </div>
-

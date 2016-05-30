@@ -35,8 +35,8 @@
         <% end %>
         </div>
         <div class="card">
-          <h4 class="card-title hidden-md-down">Hospital de formación [nivel]</h4>
-          <p class="card-text"><%= icon :hospital_o, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.email %></p>
+          <h4 class="card-title hidden-md-down">Hospital de formación</h4>
+          <p class="card-text"><%= icon :hospital_o, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.universities.find_by(level: '2').name %></p>
         </div>
 
       </div>

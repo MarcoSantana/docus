@@ -22,17 +22,17 @@
 
 
     u.save
-    100.times do
+    10.times do
       d = Document.new
       d.user_id = u.id
       d.certificate = Document.certificates.map { |s| s[0]  }.sample
-      d.description = Faker::Lorem.characters(char_count = 254)
+      d.description = Faker::Lorem.words(20)
       d.emission_date = Time.now
       #d.image = File.new('/public/images/document_icon_default.png')
       d.save
     end
   end
-100.times do
+30.times do
   uni = University.new
   uni.name = Faker::University.name
   uni.level = University.levels.map { |s| s[0] }.sample

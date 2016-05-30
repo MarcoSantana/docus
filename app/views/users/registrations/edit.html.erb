@@ -6,14 +6,13 @@
     <%= f.text_field :name, label:'Nombre' %>
     <%= f.text_field :last_name, label:'Apellidos' %>
 
-    <%= f.file_field :avatar %>
 
       <div class="field">
       <% current_user.universities.each do |uni| %>
        <%= uni.name %>
        <%= uni.level.humanize %>
       <% end %>
-      <%= f.collection_select :universities, University.all, :id, (:name_with_level),  class: 'form-control' %>
+      <%= f.collection_select :entities, University.all, :id, (:name_with_level),  class: 'form-control' %>
 
       </div>
  <div class="field">
