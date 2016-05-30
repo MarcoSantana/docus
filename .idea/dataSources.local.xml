@@ -7,5 +7,9 @@
       <schema-pattern>docus_development.*</schema-pattern>
       <default-schemas>docus_development.*</default-schemas>
     </data-source>
+    <data-source name="Sqlite (Xerial) - development.sqlite3" uuid="c7bcb498-6206-4b35-b3f5-90302599a2c9">
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+    </data-source>
   </component>
 </project>
