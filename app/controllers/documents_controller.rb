@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     #@documents = Document.all
-    @documents = current_user.documents
+    @documents = current_user.documents.order(:certificate)
   end
 
   # GET /documents/1

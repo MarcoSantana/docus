@@ -1,28 +1,39 @@
 <div class="container m-t-3">
-  <h1>Listado de documentos</h1>
-  <% @documents.each_slice(4) do |document| %>
-      <div class="row row-eq-height"><!-- row -->
-        <% document.each do |doc_col| -%>
-            <div class="col-md-3">
-              <div class="card">
-                <%= image_tag doc_col.image.url(:medium), class: 'img-responsive card-img-top img-thumbnail ' %>
-                <div class="card-block">
-                  <h4 class="card-title"><%= doc_col.to_s %></h4>
-                  <p class="card-text"><%= doc_col.description %></p>
-                  <p class="card-text"><small class="text-muted">Emitido <%= doc_col.emission_date %></small></p>
-                </div>
-                <div class="card-block">
-                  <%= link_to 'Ver', doc_col %>
-                  <%= link_to 'Editar', edit_document_path(doc_col) %>
-                  <%= link_to 'Borrar', doc_col, method: :delete, data: { confirm: '¿Está seguro?' } %>
-                </div>
-              </div>
-            </div>
-        <% end -%>
+  <h2 class="muted">Mis documentos</h2>
+
+<% @documents.each_slice(3) do |document| %>
+
+<div class="card-group">
+  <% document.each do |doc_col| -%>
+    <div class="card">
+      <%= link_to doc_col do %>
+        <%= image_tag doc_col.image.url(:medium), class: 'img-responsive card-img-top img-thumbnail ' %>
+      <% end %>
+      <div class="card-block">
+        <h4 class="card-title"><%= doc_col.to_s %></h4>
+        <p class="card-text"><%= doc_col.description.truncate(30) %></p>
+        <p class="card-text"><small class="text-muted">Fecha de emisión:  <%= doc_col.emission_date %></small></p>
+        <div class="" style="position: absolute; bottom:0;">
+          <!--
+          <%= link_to doc_col, class:'btn btn-sm btn-info' do %>
+          <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          Ver
+          <% end %>
+          -->
+          <%= link_to edit_document_path(doc_col), class:'btn btn-sm btn-success' do %>
+            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
+          <%= link_to doc_col, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
+            <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
+        </div>
       </div>
+    </div>
+<% end %>
+</div>
+
+<% end %>
+  <%= link_to new_document_path, class: 'btn btn-success' do%>
+  <%= icon :file_o, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear documento nuevo
   <% end %>
-
-
-
-  <%= link_to 'Crear un nuevo documento', new_document_path, class: 'btn btn-info' %>
 </div>

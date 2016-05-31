@@ -12,9 +12,10 @@
         <p class="card-text"><%= @document.description %></p>
         <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
         <div class="card-block">
-          <%= link_to 'Editar', edit_document_path(@document), class:'' %>
-          <%= link_to 'Regresar', documents_path, class:''%>
-          <%= modal title: 'Borrar', size: :large, id: 'modal', button: {context: :danger} do %>
+          <%= link_to edit_document_path(@document), class:'btn btn-sm btn-success'  do %>
+            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
+          <%= modal title: "#{icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1}}", size: :large, id: 'modal', button: {context: :danger} do %>
               <div class="modal-body">¿Desea borrar el documento?
                 <div class="card-block">
                   <h4 class="card-title"><%= @document.to_s %></h4>
@@ -24,9 +25,15 @@
                   <p><%= image_tag @document.image.url, class: 'card-img-top img-fluid' %></p>
                 </div>
               </div>
-              <div class="modal-footer"><%= button_to 'Eliminar documento', @document, :method=>:delete, :class=>:destroy, class: 'btn btn-danger'  %></div>
+              <div class="modal-footer">
+                <%= button_to  @document, :method=>:delete, :class=>:destroy, class: 'btn btn-danger' do %>
+                  <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+                <% end %>
+              </div>
           <% end %>
-
+          <%= link_to documents_path, class:'btn btn-sm btn-primary' do %>
+            <%= icon :arrow_left, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
         </div>
       </div>
     </div>

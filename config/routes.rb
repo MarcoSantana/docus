@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :universities
   resources :documents
+  resources :universities
   get 'home/index'
   get 'user_dashboard', to: 'home#user_dashboard'
   #devise_for :users, :sign_out_via => [ :get, :post, :delete ]

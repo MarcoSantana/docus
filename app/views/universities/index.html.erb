@@ -1,0 +1,37 @@
+<div class="container m-t-3">
+  <h2 class="muted">Mis universidades</h2>
+
+<% @universities.each_slice(3) do |university| %>
+
+<div class="card-group">
+  <% university.each do |uni_col| -%>
+    <div class="card">
+      <%= link_to uni_col do %>
+
+      <% end %>
+      <div class="card-block">
+        <h4 class="card-title"><%= uni_col.to_s %></h4>
+        <div class="" style="position: absolute; bottom:0;">
+          <!--
+          <%= link_to uni_col, class:'btn btn-sm btn-info' do %>
+          <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          Ver
+          <% end %>
+          -->
+          <%= link_to edit_university_path(uni_col), class:'btn btn-sm btn-success' do %>
+            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
+          <%= link_to uni_col, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
+            <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+
+<% end %>
+  <%= link_to new_university_path, class: 'btn btn-success' do%>
+  <%= icon :file_o, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear universityo nuevo
+  <% end %>
+</div>
