@@ -10,8 +10,10 @@
 
       <% end %>
       <div class="card-block">
-        <h4 class="card-title"><%= uni_col.to_s %></h4>
+        <h4 class="card-title"><%= uni_col.name %></h4>
         <div class="" style="position: absolute; bottom:0;">
+          [contact]
+          [logo]
           <!--
           <%= link_to uni_col, class:'btn btn-sm btn-info' do %>
           <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
@@ -32,6 +34,6 @@
 
 <% end %>
   <%= link_to new_university_path, class: 'btn btn-success' do%>
-  <%= icon :file_o, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear universityo nuevo
+  <%= icon :university, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear universidad nueva
   <% end %>
 </div>
