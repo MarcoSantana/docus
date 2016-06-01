@@ -33,6 +33,11 @@
               <%= uni.name %>
 
             <p class="card-text"><%= icon :university, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><small class="muted"><%= uni.name_short %></small></p>
+              <p class="card-text">
+                <% uni.titles.all.each do |title| %>
+                  <%= title.level %>
+                <% end %>
+              </p>
 
         <% end %>
         </div>

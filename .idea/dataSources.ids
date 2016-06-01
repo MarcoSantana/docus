@@ -355,4 +355,7 @@
       <primary-key columns="id"/>
     </table>
   </data-source>
+  <data-source name="PostgreSQL - postgres@localhost" uuid="35922bc9-0d1b-4b86-aa7e-e1c13f86749b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

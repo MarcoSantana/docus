@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'title/index'
+
+  get 'title/show'
+
+  get 'title/new'
+
+  get 'title/edit'
+
+  get 'title/create'
+
   resources :universities
   resources :documents
   resources :universities

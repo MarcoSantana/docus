@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :titles
   has_many :universities, through: :titles
 
+  User.eager_load(:titles)
+
   #accepts_nested_attributes_for :universities
 
   has_attached_file :avatar, :styles => {:medium => '300x300>', :thumb => '100x100>'}, :default_url => '/images/avatar_default.png'

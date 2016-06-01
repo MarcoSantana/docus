@@ -11,5 +11,10 @@
       <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
     </data-source>
+    <data-source name="PostgreSQL - postgres@localhost" uuid="35922bc9-0d1b-4b86-aa7e-e1c13f86749b">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>msantana</user-name>
+    </data-source>
   </component>
 </project>
