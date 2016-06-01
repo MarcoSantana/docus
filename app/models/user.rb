@@ -12,9 +12,15 @@ class User < ActiveRecord::Base
 
 
   has_many :documents
-  has_and_belongs_to_many :universities, association_foreign_key: 'entity_id'
-  accepts_nested_attributes_for :universities
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/avatar_default.png"
+
+  has_many :titles
+  has_many :universities, through: :titles
+
+  User.eager_load(:titles)
+
+  #accepts_nested_attributes_for :universities
+
+  has_attached_file :avatar, :styles => {:medium => '300x300>', :thumb => '100x100>'}, :default_url => '/images/avatar_default.png'
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def compound_name

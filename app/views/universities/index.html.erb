@@ -7,13 +7,12 @@
   <% university.each do |uni_col| -%>
     <div class="card">
       <%= link_to uni_col do %>
-
+      <%= image_tag uni_col.logo.url(:medium), class: 'img-responsive card-img-top img-thumbnail center-block' %>
       <% end %>
       <div class="card-block">
-        <h4 class="card-title"><%= uni_col.name %></h4>
+        <h4 class="card-title text-xs-center"><%= uni_col.name %></h4>
+        <p class="card-text text-muted text-xs-center"><%= uni_col.name_short %></p>
         <div class="" style="position: absolute; bottom:0;">
-          [contact]
-          [logo]
           <!--
           <%= link_to uni_col, class:'btn btn-sm btn-info' do %>
           <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>

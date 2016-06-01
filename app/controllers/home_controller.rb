@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
   def user_dashboard
+    #@titles = current_user.titles.all
     render 'user_dashboard'
   end
 end

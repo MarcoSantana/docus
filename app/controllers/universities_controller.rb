@@ -18,7 +18,7 @@ class UniversitiesController < ApplicationController
   # GET /universities/new
   def new
     @university = University.new
-    @university.user_id= current_user.id
+#    @university.user_id= current_user.id
   end
 
   # GET /universities/1/edit
@@ -29,7 +29,7 @@ class UniversitiesController < ApplicationController
   # POST /universities.json
   def create
     @university = University.new(university_params)
-    @university.user_id= current_user.id
+#    @university.user_id= current_user.id
 
     respond_to do |format|
       if @university.save
@@ -74,7 +74,6 @@ class UniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def university_params
-      params.fetch(:university, {}).permit(:certificate, :emission_date, :description, :image)
-
+      params.fetch(:university, {}).permit(:name, :name_short, :logo)
     end
 end
