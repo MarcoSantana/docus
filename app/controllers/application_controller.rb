@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_paper_trail_whodunnit
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  if defined? BetterErrors
+    BetterErrors.editor = "atm://open?url=file://%{file}&line=%{line}"
+  end
 protected
 
 def configure_permitted_parameters

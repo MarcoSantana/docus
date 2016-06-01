@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :universities_user do
+    
+  end
   factory :university do
     
   end

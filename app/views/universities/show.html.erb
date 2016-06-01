@@ -1,4 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_university_path(@university) %> |
-<%= link_to 'Back', universities_path %>
+<div class="container m-t-3">
+  <div class="card">
+    <%= link_to @university do %>
+    <%= image_tag @university.logo.url(:medium), class: 'img-responsive card-img-top img-thumbnail center-block' %>
+    <% end %>
+    <div class="card-block">
+      <h4 class="card-title text-xs-center"><%= @university.name %></h4>
+      <p class="card-text text-muted text-xs-center"><%= @university.name_short %></p>
+      <div class="" style="position: absolute; bottom:0;">
+        <!--
+        <%= link_to @university, class:'btn btn-sm btn-info' do %>
+        <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+        Ver
+        <% end %>
+        -->
+        <%= link_to edit_university_path(@university), class:'btn btn-sm btn-success' do %>
+          <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+        <% end %>
+        <%= link_to @university, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
+          <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Edit', edit_university_path(@university) %> |
+  <%= link_to 'Back', universities_path %>
+</div>

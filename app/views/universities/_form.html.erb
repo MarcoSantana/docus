@@ -1,17 +1,33 @@
-<%= form_for(@university) do |f| %>
-  <% if @university.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@university.errors.count, "error") %> prohibited this university from being saved:</h2>
 
-      <ul>
-      <% @university.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="container m-t-3">
+
+  <%= form_for @university, layout: :basic  do |f| %>
+  <fieldset>
+    <div id="target">
+    <%= f.file_field :logo, class: 'form-control-file', label: 'Logotipo', placeholder: 'Archivo de imagen', id: 'pictureInput' %>
+    <%= f.text_field :name, class: "form-control", label: 'Nombre completo', placeholder: 'Nombre de la universidad' %>
+    <%= f.text_field :name_short, class: "form-control", label: 'Nombre corto', placeholder: 'Nombre corto' %>
+  </fieldset>
 
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  <% end %>
+</div>
+<script>
+$(function() {
+  $('#pictureInput').on('change', function(event) {
+    var files = event.target.files;
+    var image = files[0]
+    var reader = new FileReader();
+    reader.onload = function(file) {
+      var img = new Image();
+      console.log(file);
+      img.src = file.target.result;
+      $('#target').html(img);
+    }
+    reader.readAsDataURL(image);
+    console.log(files);
+  });
+  });
+</script>
