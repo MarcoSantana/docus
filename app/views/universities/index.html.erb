@@ -32,7 +32,16 @@
 </div>
 
 <% end %>
+  <div class="card">
+    <p class="block-center">
+      <%= paginate @universities %>
+      <%= page_entries_info @universities %>
+    </p>
+  </div>
   <%= link_to new_university_path, class: 'btn btn-success' do%>
   <%= icon :university, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear universidad nueva
+  <% end %>
+  <%= modal title: "#{icon :university, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1}}", size: :large, id: 'modal', button: {class: 'btn-sm btn-success'} do %>
+
   <% end %>
 </div>

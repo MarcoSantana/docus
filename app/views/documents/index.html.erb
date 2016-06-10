@@ -1,15 +1,45 @@
 <div class="container m-t-3">
-  <h2 class="muted">Mis documentos</h2>
+  <div class="container m-t-3 p-y-3 form-field">
+    <%= search_form_for @q, class: 'form-inline' do |f| %>
+      <div class="input-group">
+        <%= f.search_field :description_cont, placeholder: 'Descripción contiene', class: 'form-control' %>
+        <span class = "input-group-btn">
+          <%= f.submit 'search', value: 'Buscar',  class: 'btn  btn-info-outline'%>
+          <%= link_to 'Borrar búsqueda', request.path, class: 'btn btn-danger-outline' %>
+        </span>
+
+      </div>
+  <% end %>
+  </div>
+  <div class="card-group">
+    <div class="card text-xs-center">
+      <div class="card-block">
+        <%= sort_link(@q, :description, 'Descripción', default_order: :desc ) %>
+      </div>
+    </div>
+    <div class="card text-xs-center">
+      <div class="card-block">
+        <%= paginate @documents %>
+      </div>
+    </div>
+    <div class="card text-xs-center">
+      <div class="card-block">
+        <%= sort_link(@q, :emission_date, 'Fecha de emisión', default_order: :desc) %>
+      </div>
+    </div>
+  </div>
 
 <% @documents.each_slice(3) do |document| %>
-
 <div class="card-group">
   <% document.each do |doc_col| -%>
-    <div class="card">
-      <%= link_to doc_col do %>
-        <%= image_tag doc_col.image.url(:medium), class: 'img-responsive card-img-top img-thumbnail ' %>
-      <% end %>
-      <div class="card-block">
+      <div class="card">
+        <div class="card-block">
+          <%= link_to doc_col do %>
+              <%= image_tag doc_col.image.url(:medium), class: 'card-img-top img-responsive' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card hidden-sm-down">
         <h4 class="card-title"><%= doc_col.to_s %></h4>
         <p class="card-text"><%= doc_col.description.truncate(30) %></p>
         <p class="card-text"><small class="text-muted">Fecha de emisión:  <%= doc_col.emission_date %></small></p>
@@ -21,14 +51,15 @@
           <% end %>
           -->
           <%= link_to edit_document_path(doc_col), class:'btn btn-sm btn-success' do %>
-            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+              <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
           <% end %>
           <%= link_to doc_col, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
-            <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+              <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
           <% end %>
         </div>
       </div>
-    </div>
+
+
 <% end %>
 </div>
 

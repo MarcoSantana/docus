@@ -1,6 +1,12 @@
-<h1>Editing University</h1>
+<div class="container">
+  <h1>Editing University</h1>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', @university %> |
-<%= link_to 'Back', universities_path %>
+  <%= link_to @university, class: 'btn btn-sm btn-info' do%>
+      <%= icon :eye, library: :font_awesome, class: 'fa-1x', id: 'icon', data: {value: 1} %>
+  <% end %>
+  <%= link_to university_path, class: 'btn btn-sm btn-primary' do%>
+      <%= icon :arrow_left, library: :font_awesome, class: 'fa-1x', id: 'icon', data: {value: 1} %>
+  <% end %>
+</div>
