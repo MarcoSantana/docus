@@ -6,7 +6,7 @@ class UniversitiesController < ApplicationController
   # GET /universities
   # GET /universities.json
   def index
-    @universities = University.all
+    @universities = University.all.page(params[:page]).per(6)
     #@universities = current_user.universities
   end
 

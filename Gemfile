@@ -29,6 +29,8 @@ gem 'paperclip'
 gem 'paper_trail'
 #Bootstrap 3 helper
 gem 'bh'
+#Pagination
+gem 'kaminari'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

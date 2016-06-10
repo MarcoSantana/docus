@@ -1,4 +1,3 @@
-
 <div class="container m-t-3">
 
   <%= form_for @university, layout: :basic  do |f| %>
@@ -10,24 +9,9 @@
   </fieldset>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit do %>
+      <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+        <% end %>
   </div>
   <% end %>
 </div>
-<script>
-$(function() {
-  $('#pictureInput').on('change', function(event) {
-    var files = event.target.files;
-    var image = files[0]
-    var reader = new FileReader();
-    reader.onload = function(file) {
-      var img = new Image();
-      console.log(file);
-      img.src = file.target.result;
-      $('#target').html(img);
-    }
-    reader.readAsDataURL(image);
-    console.log(files);
-  });
-  });
-</script>
