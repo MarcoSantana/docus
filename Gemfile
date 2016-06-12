@@ -29,6 +29,8 @@ gem 'paperclip'
 gem 'paper_trail'
 #Bootstrap 3 helper
 gem 'bh'
+#Bower-rails
+gem 'bower-rails'
 #Pagination
 gem 'kaminari'
 #Sorting and searching
