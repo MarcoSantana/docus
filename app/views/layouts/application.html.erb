@@ -11,6 +11,15 @@
   <!--Fontawesome -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
   <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+
 
 
   <title>Docus</title>
@@ -19,7 +28,7 @@
   <nav class="navbar navbar-fixed-top navbar-dark" style="background-color: #730E15;">
     <!-- navbar container -->
     <div class="container">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav collapse navbar-toggleable-sm" id="exCollapsingNavbar">
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
@@ -32,7 +41,6 @@
             </li>
         <% end %>
 
-        <div class="collapse" id="exCollapsingNavbar">
           <%- if user_signed_in? %>
               <li class="nav-item">
                 <%= link_to t('auth.sign_out'), destroy_user_session_path, method: 'delete', class: 'nav-link' %>
@@ -45,10 +53,9 @@
                 <%= link_to t('auth.sign_up'), new_user_registration_path, class: 'nav-link' %>
               </li>
           <% end %>
-        </div>
       </ul>
-      <button class="navbar-toggler pull-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-        <%= icon :user, library: :font_awesome, class: 'fa-1x fa-inverse muted', id: 'icon', data: {value: 1} %>
+      <button class="navbar-toggler pull-xs-right colapse-md-up hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+        <i class="material-icons">reorder</i>
       </button>
     </div>
     <!-- /navbar container -->
@@ -65,37 +72,7 @@
   <%= yield  %>
 </div>
 <!-- footer -->
-<div class='row p-y-1'>
-  <div class="col-md-7">
-    <ul class="nav nav-inline">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Community</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Tracks</a>
-      </li>
-      <li class="nav-item">
-        <!-- Split button -->
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-secondary">Login Options</button>
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu">
-            <% if !user_signed_in? %>
-              <%= link_to 'Sign in', new_session_path(:user) %>
-            <% end %>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-5 text-md-right">
-    <small>&copy; 2016 Silico &amp; Consejo Méxicano de Especialidad</small>
-  </div>
 
-</div>
 <!-- /footer -->
 
 <!-- jQuery first, then Bootstrap JS. -->

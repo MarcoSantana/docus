@@ -7,7 +7,10 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     #@documents = Document.all
-    @documents = current_user.documents.order(:certificate, :emission_date).page(params[:page]).per(2)
+
+    @q = Document.ransack(params[:q])
+    @documents = @q.result(distinct: true).page(params[:page]).per(2)
+    #@documents = current_user.documents.order(:certificate, :emission_date)
   end
 
   # GET /documents/1

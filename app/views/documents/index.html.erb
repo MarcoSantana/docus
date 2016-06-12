@@ -1,44 +1,74 @@
 <div class="container m-t-3">
-  <h2 class="muted">Mis documentos</h2>
-<% @documents.each_slice(3) do |document| %>
+  <div class="container form-field">
 
-<div class="card-group">
-  <% document.each do |doc_col| -%>
-    <div class="card">
-      <%= link_to doc_col do %>
-        <%= image_tag doc_col.image.url(:medium), class: 'img-responsive card-img-top img-thumbnail ' %>
-      <% end %>
-      <div class="card-block">
-        <h4 class="card-title"><%= doc_col.to_s %></h4>
-        <p class="card-text"><%= doc_col.description.truncate(30) %></p>
-        <p class="card-text"><small class="text-muted">Fecha de emisión:  <%= doc_col.emission_date %></small></p>
-        <div class="" style="position: absolute; bottom:0;">
-          <!--
-          <%= link_to doc_col, class:'btn btn-sm btn-info' do %>
-          <%= icon :eye, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-          Ver
+    <%= search_form_for @q, class: 'form-inline' do |f| %>
+        <div class="input-group p-t-3">
+          <%= f.search_field :description_cont, placeholder: 'Descripción contiene', class: 'form-control' %>
+          <span class="input-group-btn">
+              <%= button_tag( class: 'btn') do %>
+                    <i class="material-icons">search</i>
+              <% end %>
+            <%= link_to request.path, class: 'btn btn-danger btn-sm' do %>
+             <i class="material-icons">clear</i>
           <% end %>
-          -->
-          <%= link_to edit_document_path(doc_col), class:'btn btn-sm btn-success' do %>
-            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-          <% end %>
-          <%= link_to doc_col, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
-            <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-          <% end %>
+        </span>
+          <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseExample">
+            <i class="material-icons ">sort</i>
+          </button>
+        </div>
+    <% end %>
+  </div>
+  <div class="collapse" id="collapseSearch">
+    <div class="card-group">
+      <div class="card">
+        <div class="card-block">
+          <%= sort_link(@q, :description, 'Descripción', default_order: :desc ) %>
+        </div>
+        <div class="card-block">
+          <%= sort_link(@q, :emission_date, 'Fecha de emisión', default_order: :desc) %>
+        </div>
+        <div class="card-block">
+          <%= paginate @documents %>
         </div>
       </div>
     </div>
-<% end %>
-</div>
+  </div>
+  <div class="list-group">
+    <% @documents.each do |document| %>
+        <div class="list-group-item">
+          <%= link_to document do %>
+              <div class="row-action-primary">
+                <%= image_tag document.image.url(:medium), class: 'card-img-top img-responsive' %>
+              </div>
+              <div class="row-content">
+                <div class="least-content">
+                  <span class="label label-danger"><i class="hidden-sm-down">Default</i></span>
+                </div>
+                <h4 class="list-group-item-heading"><%= document.to_s %></h4>
+                <p class="list-group-item-text"><%= document.description.truncate(80) %></p>
+                <p class="list-group-item-text"> <%= link_to edit_document_path(document), class:'btn btn-sm btn-success' do %>
+                      <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+                  <% end %>
+                  <%= link_to document, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
+                      <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+                  <% end %></p>
+              </div>
+              </div>
+          <% end %>
+          <div class="list-group-separator"></div>
+    <% end %>
+    <!-- /list-group -->
+  </div>
+  <div class='row m-b-0 navbar-fixed-bottom'>
+    <ul class="nav nav-inline p-x-1">
+      <li class="nav nav-inline p-x-1">
+        <%= link_to new_document_path, class: 'btn btn-danger  btn-fab pull-right' do%>
+            <i class="material-icons">note_add</i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 
-<% end %>
-  <%= link_to new_document_path, class: 'btn btn-success' do%>
-  <%= icon :file_o, library: :font_awesome, class: 'fa-2x', id: 'icon', data: {value: 1} %>Crear documento nuevo
-  <% end %>
-</div>
-<div class="card">
-  <p class="block-center">
-    <%= paginate @documents %>
-    <%= page_entries_info @documents %>
-  </p>
+
+
 </div>
