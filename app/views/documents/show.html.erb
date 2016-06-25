@@ -1,41 +1,31 @@
 <div class="container">
   <div class="col-md-4 col-md-offset-4 m-t-3">
-    <div class="card">
-      <%= image_tag @document.image.url, class: 'card-img-top img-fluid' %>
-      <div class="card-block">
+    <div class="card text-xs-center">
+      <%= image_tag @document.image.url, class: 'card-img-top img-fluid img-center' %>
+      <div class="card-block card-inverse card-primary">
         <h4 class="card-title"><small>
-          <span class="fa-stack fa-lg ">
-            <i class="fa fa-file-o fa-stack-2x"></i>
-            <i class="fa fa-certificate fa-stack-1x fa-1x text-warning"></i>
-          </span>
+          <i class="material-icons primary">insert_drive_file</i>
         </small><%= @document.to_s %></h4>
         <p class="card-text"><%= @document.description %></p>
         <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
         <div class="card-block">
           <%= link_to edit_document_path(@document), class:'btn btn-sm btn-success'  do %>
-            <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+            <i class="material-icons">accept</i>
           <% end %>
-          <%= modal title: "#{icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1}}", size: :large, id: 'modal', button: {context: :danger} do %>
-              <div class="modal-body">¿Desea borrar el documento?
-                <div class="card-block">
-                  <h4 class="card-title"><%= @document.to_s %></h4>
-                  <div class="card"><%= @document.description %></div>
-                  <p class="card-text"></p>
-                  <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
-                  <p><%= image_tag @document.image.url, class: 'card-img-top img-fluid' %></p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <%= button_to  @document, :method=>:delete, :class=>:destroy, class: 'btn btn-danger' do %>
-                  <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-                <% end %>
-              </div>
-          <% end %>
+
           <%= link_to documents_path, class:'btn btn-sm btn-primary' do %>
             <%= icon :arrow_left, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
           <% end %>
         </div>
       </div>
+      <nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
+        <a class="navbar-brand" href="#">Fixed bottom</a>
+        <%= link_to "Delete", personal_document_path(@document), action_name: :delete, data: {confirm: "This can not be undone"} %>
+
+        <%= link_to  @document, class: 'btn btn-danger btn-fab pull-right', method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="material-icons">delete</i>
+        <% end %>
+      </nav>
     </div>
   </div>
 </div>

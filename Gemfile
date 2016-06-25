@@ -31,10 +31,17 @@ gem 'paper_trail'
 gem 'bh'
 #Bower-rails
 gem 'bower-rails'
+
 #Pagination
 gem 'kaminari'
+#Charting
+gem 'chartkick', '~> 2.0'
+gem 'groupdate', '~> 2.1.1'
+gem 'active_median', '~> 0.1.0'
 #Sorting and searching
 gem 'ransack'
+#Multipart form (wizard)
+gem 'wicked'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

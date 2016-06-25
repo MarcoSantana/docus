@@ -1,14 +1,39 @@
 class Document < ActiveRecord::Base
   belongs_to :user
   #has_paper_trail
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: '/images/document_icon_default.png'
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
-  enum certificate: [ :educación_contínua, :docencia, :profesor_titular, :ejercicio_de_la_especialidad, :membresía, :impatir_seminario, :asistir_seminario, :investigación, :profesor_asociado, :personal, :formación_profesional ]
-  validates :certificate, presence: true
-  validates :emission_date, presence: true
+
+
+
+  enum status:  [:por_revisar,
+                :por_corregir,
+                :rechazado,
+                :aceptado]
+
+
+
+  enum type: [:PersonalDocument,
+              :formación_profesional,
+              :constancia_de_actividad,
+              :evento,
+              :publicación
+             ]
+
 
   def to_s
-    certificate.humanize
+    type.to_s.humanize
+  end
+
+  def status_style
+    case status
+      when 'por_revisar'
+        'info'
+      when 'por_corregir'
+        'warning'
+      when 'rechazado'
+        'danger'
+      when 'aceptado'
+        'success'
+    end
   end
 
 

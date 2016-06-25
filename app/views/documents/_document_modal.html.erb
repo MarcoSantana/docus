@@ -1,0 +1,16 @@
+<%= modal title: '<i class="material-icons">delete</i>', size: :large, id: 'modal', button: {context: :danger, class: 'btn btn-fab'} do %>
+    <div class="modal-body">¿Desea borrar el documento?
+      <div class="card-block">
+        <h4 class="card-title"><%= @document.to_s %></h4>
+        <div class="card"><%= @document.description %></div>
+        <p class="card-text"></p>
+        <p class="card-text text-muted">Creado en <small class="text-muted"><%= @document.created_at %></small></p>
+        <p><%= image_tag @document.image.url, class: 'card-img-top img-fluid' %></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= button_to  @document, :method=>:delete, :class=>:destroy, class: 'btn btn-danger' do %>
+          <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
+      <% end %>
+    </div>
+<% end %>

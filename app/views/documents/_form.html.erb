@@ -12,13 +12,32 @@
 
   <% end %>
     <fieldset class="form-group">
-      <%= f.select :certificate, options_for_select(Document.certificates.map { |s| [ s[0].humanize, s[0] ] }),  class: 'form-control' %>
+
       <%= f.text_field :description, label: 'Descripción', placeholder: 'Descripción de este documento' %>
       <%= f.date_field :emission_date, label:'Fecha de emisión' %>
-      <%= f.file_field :image %>
+      <%= f.file_field :image, :onchange => 'previewFile()', placeholder: 'Elegir imagen' %>
+
+      <img src="" height="200" alt="Imagen..">
     </fieldset>
 
   <div class="actions">
     <%= f.submit "Crear nuevo documento"%>
   </div>
 <% end %>
+<script language="JavaScript">
+  function previewFile() {
+    var preview = document.querySelector('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+</script>

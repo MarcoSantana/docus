@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
 
   has_many :documents
+  has_many :personal_documents
 
   has_many :titles
   has_many :universities, through: :titles

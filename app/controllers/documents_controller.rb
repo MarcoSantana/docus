@@ -1,16 +1,20 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_user
+
 
 
   # GET /documents
   # GET /documents.json
   def index
-    #@documents = Document.all
+    if @user.administrador? || @user.moderador?
+      @q = Document.ransack(params[:q])
+    else
+      @q = @user.documents.ransack(params[:q])
+    end
+    @documents = @q.result(distinct: true).page(params[:page]).per(10)
 
-    @q = Document.ransack(params[:q])
-    @documents = @q.result(distinct: true).page(params[:page]).per(2)
-    #@documents = current_user.documents.order(:certificate, :emission_date)
   end
 
   # GET /documents/1
@@ -38,7 +42,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.html { redirect_to @document, notice: 'Documento creado exitosamente' }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render :new }
@@ -75,6 +79,10 @@ class DocumentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

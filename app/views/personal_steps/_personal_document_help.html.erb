@@ -1,0 +1,38 @@
+<%= modal title: 'Ayuda', size: :medium, id: 'modal', button: {class: :en} do %>
+    <div class="modal-body">
+      <div class="card" style="">
+        <div class="card-block">
+          <p class="card-text">Entre los documentos personales tenemos</p>
+          <div class="list-group">
+            <div class="list-group-item">
+              <div class="row-action-primary">
+                <i class="material-icons" style="background-color: teal; font-family: 'Roboto Condensed', sans-serif;">AN</i>
+              </div>
+              <div class="row-content">
+                <h4 class="list-group-item-heading">Acta de nacimiento</h4>
+
+                <p class="list-group-item-text">Más datos sobre el acta de nacimiento.</p>
+              </div>
+            </div>
+            <div class="list-group-separator"></div>
+            <div class="list-group-item">
+              <div class="row-action-primary">
+                <i class="material-icons" style="background-color: #303F9F; font-family: 'Roboto Condensed', sans-serif;">CU</i>
+              </div>
+              <div class="row-content">
+                <h4 class="list-group-item-heading">CURP</h4>
+
+                <p class="list-group-item-text">Más datos sobre CURP.</p>
+              </div>
+            </div>
+            <div class="list-group-separator"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary btn-fab" data-dismiss="modal">
+        <i class="material-icons">done</i>
+      </button>
+    </div>
+<% end %>

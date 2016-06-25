@@ -6,77 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-  <!--Fontawesome -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+  <!-- Bootstrap CSS-->
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.1/bootstrap-material-design.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
+
+
+
+  <%= csrf_meta_tag %>
+
+  <%= csrf_meta_tags %>
+
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
 
 
 
   <title>Docus</title>
 </head>
-<body id="home" data-spy="scroll" data-target=".navbar" data-offset="100">
-  <nav class="navbar navbar-fixed-top navbar-dark" style="background-color: #730E15;">
-    <!-- navbar container -->
-    <div class="container">
-      <ul class="nav navbar-nav collapse navbar-toggleable-sm" id="exCollapsingNavbar">
-        <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
-        </li>
-        <%- if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'Mis Documentos', documents_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Mis Datos', user_dashboard_path, class: 'nav-link' %>
-            </li>
-        <% end %>
 
-          <%- if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to t('auth.sign_out'), destroy_user_session_path, method: 'delete', class: 'nav-link' %>
-              </li>
-          <% else %>
-              <li class="nav-item">
-                <%= link_to t('auth.sign_in'), new_user_session_path, class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
-                <%= link_to t('auth.sign_up'), new_user_registration_path, class: 'nav-link' %>
-              </li>
-          <% end %>
-      </ul>
-      <button class="navbar-toggler pull-xs-right colapse-md-up hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-        <i class="material-icons">reorder</i>
-      </button>
-    </div>
-    <!-- /navbar container -->
-  </nav>
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="100">
+
   <!-- /navbar -->
 
   <!--Flash alerts -->
   <% flash.each do |key, value| %>
-      <div class="container p-t-3">
+      <div class="container p-b-3  m-l-3">
         <%= alert_box value, context: key %>
       </div>
   <% end %>
   <!--/flash alerts-->
-  <%= yield  %>
-</div>
+
+
+    <%= yield  %>
+
 <!-- footer -->
 
 <!-- /footer -->
 
-<!-- jQuery first, then Bootstrap JS. -->
+<!-- jQuery first, then Bootstrap JS.-->
+<%= javascript_include_tag "rails" %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.0.0/chartkick.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+
 </body>
 </html>

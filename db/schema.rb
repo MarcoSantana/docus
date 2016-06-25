@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601193222) do
+ActiveRecord::Schema.define(version: 20160620215334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "documents", force: :cascade do |t|
-    t.integer  "certificate"
-    t.string   "description",        limit: 255
+    t.string   "type"
     t.date     "emission_date"
     t.integer  "user_id"
     t.datetime "created_at",                                 null: false
@@ -29,6 +28,9 @@ ActiveRecord::Schema.define(version: 20160601193222) do
     t.datetime "image_updated_at"
     t.integer  "value",                          default: 0
     t.date     "caducity"
+    t.integer  "status",                         default: 0
+    t.integer  "description"
+    t.text     "comentary"
   end
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
