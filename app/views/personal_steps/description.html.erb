@@ -1,0 +1,35 @@
+<div class="jumbotron bg-primary bg-inverse">
+  <h4 class="display-1">Primer paso</h4>
+  <p class="lead">Capture una descripción breve de su documento </p>
+  <hr class="m-t-2 m-b-0">
+</div>
+<div class="card">
+    <%= form_for @personal_document,url: next_wizard_path(:document_id => @personal_document.id), method: :put, layout: :basic  do |f| %>
+        <% if @personal_document.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@personal_document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+              <ul>
+                <% @personal_document.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+
+        <% end %>
+        <fieldset class="form-group">
+
+          <%= f.text_field :description, label: 'Descripción', placeholder: 'Descripción de este documento' %>
+
+        </fieldset>
+
+        <div class="actions">
+          <%= button_tag( class: 'btn btn-fab btn-primary m-a-1') do %>
+              <i class="material-icons">keyboard_arrow_right</i>
+          <% end %>
+          <%= f.submit "Next step" %>
+          <%= link_to 'Siguiente paso', next_wizard_path  %>
+
+        </div>
+    <% end %>
+  </div>

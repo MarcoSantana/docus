@@ -1,0 +1,17 @@
+{
+  "name": "chartkick",
+  "version": "2.0.0",
+  "main": "chartkick.js",
+  "ignore": [],
+  "homepage": "https://github.com/ankane/chartkick.js",
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "36dda6698dc0adab6961344ba219dcd97027fa11"
+  },
+  "_source": "https://github.com/ankane/chartkick.js.git",
+  "_target": "^2.0.0",
+  "_originalSource": "chartkick",
+  "_direct": true
+}

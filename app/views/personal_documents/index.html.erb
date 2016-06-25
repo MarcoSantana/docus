@@ -1,0 +1,92 @@
+<div class="jumbotron bg-inverse bg center-block">
+  <h1 class="">Documentos personales</h1>
+</div>
+<p id="notice"><%= notice %></p>
+<style>
+  .bg{
+    background: url("images/docus_bg.png") no-repeat top center fixed;
+    background-size: cover;
+    height: 10em;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+  }
+</style>
+<div class="container m-t-3">
+
+  <div class="card">
+    <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: orange;',data: {js: 1} do %>
+        <%= sort_link(@q, :created_at, 'Fecha de creación', default_order: :desc) %>
+        <%= sort_link(@q, :status, 'Estado', default_order: :desc) %>
+    <% end %>
+    <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
+        <div class="form-group">
+          <% if @user.administrador? %>
+              <%= f.label(:name_or_last_name_or_email_cont) %>
+          <%= f.search_field(:email_cont) %>
+          <% end %>
+          <%= f.select(:status_eq, PersonalDocument.statuses, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
+          <%= link_to request.path, class: 'btn  btn-sm' do %>
+              <i class="material-icons">clear</i>
+          <% end %>
+          <%= button_tag( class: 'btn btn-sm btn-success') do %>
+              <i class="material-icons">search</i>
+          <% end %>
+        </div>
+    <% end %>
+    <%= paginate @personal_documents %>
+    <%= page_entries_info @personal_documents, :entry_name => 'documento' %>
+
+  </div>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <div class="card">
+    <%= area_chart @user.documents.all.group_by_minute(:created_at).count %>
+    <% if !@user.administrador? %>
+        <%= pie_chart @user.personal_documents.all.group(:status).count, colors: ["blue", "orange"] %>
+    <% else %>
+        <%= pie_chart PersonalDocument.all.group(:status).count, colors: ["blue", "orange"] %>
+    <% end %>
+
+  </div>
+  <div class="list-group" style="z-index: 1;">
+    <% @personal_documents.each do |personal_document| %>
+        <div class="list-group-item">
+          <div class="row-action-primary">
+            <%= link_to personal_document do %>
+                <%= image_tag personal_document.image.url(:medium), class: 'card-img-top img-responsive' %>
+            <% end %>
+          </div>
+          <div class="row-content">
+            <div class="least-content">
+              <%= render partial: 'status_label', locals: {personal_document: personal_document} %>
+            </div>
+            <h4 class="list-group-item-heading"><%= personal_document.description.humanize %></h4>
+            <p class="list-group-item-text"><small><%= personal_document.created_at %></small></p>
+            <% if @user.administrador? %>
+                <p class="list-group-item-text"><%= personal_document.user.name %></p>
+                <% end %>
+            <% unless personal_document.status == 'aceptado' %>
+                <p class="list-group-item-text"> <%= personal_document.comentary %> </p>
+            <% end %>
+          </div>
+        </div>
+        <div class="list-group-separator"></div>
+    <% end %>
+    <!-- /list-group -->
+  </div>
+
+  <div class='row m-x-1 navbar-fixed-bottom pull-right'>
+    <ul class="nav nav-inline p-x-1 p-y-1">
+      <li class="nav nav-inline p-x-1">
+        <%= link_to new_personal_document_path, class: 'btn btn-danger  btn-fab pull-right' do%>
+            <i class="material-icons">note_add</i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>

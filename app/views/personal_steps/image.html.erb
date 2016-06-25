@@ -1,0 +1,52 @@
+<script language="JavaScript">
+  function previewFile() {
+    var preview = document.querySelector('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+</script>
+<div class="jumbotron bg-primary bg-inverse">
+  <h4 class="display-1">Segundo paso</h4>
+  <p class="lead">Adjunte una imagen</p>
+  <hr class="m-t-2 m-b-0">
+</div>
+  <div class="card">
+  <%= form_for @personal_document,url: wizard_path(:image), method: :put, layout: :basic  do |f| %>
+
+    <fieldset class="form-group">
+      <% if @personal_document.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@personal_document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+            <ul>
+              <% @personal_document.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+
+      <% end %>
+      <%= f.file_field :image, :onchange => 'previewFile()', placeholder: 'Elegir imagen' %>
+
+      <img src="" height="200" alt="Image preview...">
+    </fieldset>
+
+    <div class="actions">
+      <%= link_to 'Siguiente paso', next_wizard_path  %>
+
+      <%= f.submit "Crear nuevo documento" %>
+    </div>
+  <% end %>
+  </div>
+
+  <%= render 'personal_document_help' %>
