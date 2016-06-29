@@ -49,6 +49,7 @@ class PersonalDocumentsController < ApplicationController
     respond_to do |format|
       if @personal_document.save
         format.html { redirect_to @personal_document, notice: 'Documento creado exitosamente' }
+        UserMailer.create_document_mail(@user, @personal_document).deliver_now
         format.json { render :show, status: :created, location: @personal_document }
       else
         format.html { render :new }
