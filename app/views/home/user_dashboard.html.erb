@@ -1,54 +1,43 @@
-<div class="container m-t-3 m-x-0">
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
-  <div id="dashboard" class="row">
+<div id="wrapper">
+  <div id="header" class="panels">
+    <%= image_tag current_user.avatar.url, class: 'usr_avatar' %>
+  </div>
 
-    <div class="col-md-4 m-x-0 p-r-0">
-      <div class="card-block">
-        <div class="card">
-          <%= image_tag current_user.avatar.url, class: 'card-img-top img-fluid center-block' %>
-          <div class="card-block">
-            <h4 class="card-title text-xs-center"><%= current_user.name %> <br /><small class="muted"><%= current_user.last_name %></small> </h4>
-          </div>
-          <div class="card-block text-xs-center">
-            <%= link_to 'Cambiar mis datos', edit_user_registration_path, class: 'card-link btn btn-info' %>
-          </div>
-        </div>
-      </div>
+  <div class="navbar-fixed-top" id="name">
+      <h2 class="">
+        <%= current_user.compound_name %>
+      </h2>
+  </div>
+
+  <div id="b" class="panels card-group">
+    <div class="card" style="background-color: white">
+      <h3 class="p-x-1">Estado de documentos</h3>
+      <% if !current_user.administrador? %>
+          <%= pie_chart current_user.documents.all.group(:status).count.map { |k, v| [Document.statuses.key(k).to_s.titleize, v] }%>
+      <% else %>
+          <%= pie_chart Document.all.group(:status).count.map { |k, v| [Document.statuses.key(k).to_s.titleize, v] } %>
+      <% end %>
+      <p class="card-text">Total del documentos:<%= current_user.documents.all.count %></p>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="javascript:void(0)">Home <span class="badge">42</span></a></li>
+        <li><a href="javascript:void(0)">Profile <span class="badge"></span></a></li>
+        <li><a href="javascript:void(0)">Messages <span class="badge">3</span></a></li>
+      </ul>
     </div>
-
-    <div class="col-md-8 p-l-0 m-x-0">
-      <div class="card-block">
-        <div class="card">
-          <h4 class="card-title hidden-md-down">Nombre</h4>
-          <p class="card-text"><%= icon :user_md, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.compound_name %></p>
-        </div>
-        <div class="card">
-          <h4 class="card-title hidden-md-down">Correo Electrónico</h4>
-          <p class="card-text"><%= icon :envelope, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= current_user.email %></p>
-        </div>
-        <div class="card">
-          <% current_user.universities.all.each do |uni| %>
-            <h4 class="card-title hidden-md-down">Universidad de formación</h4>
-              <%= image_tag uni.logo.url(:thumb), class: 'card-img-top img-fluid' %>
-              <%= uni.name %>
-
-            <p class="card-text"><%= icon :university, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><small class="muted"><%= uni.name_short %></small></p>
-              <p class="card-text">
-                <% uni.titles.all.each do |title| %>
-                  <%= title.level %>
-                <% end %>
-              </p>
-
-        <% end %>
-        </div>
-        <div class="card">
-          <h4 class="card-title hidden-md-down">Hospital de formación</h4>
-          <p class="card-text"><%= icon :hospital_o, library: :font_awesome, class: 'fa-2x hidden-md-up pull-left', id: 'icon', data: {value: 1} %><%= %></p>
-        </div>
-
-      </div>
+    <div class="card p-x-1">
+      <h3>Actividad por día</h3>
+      <%= line_chart current_user.documents.all.group_by_day(:created_at).count %>
     </div>
+  </div>
+  <div class="panels">
 
   </div>
 
 </div>
+<%= render 'layouts/bottom_menu' %>
+<%= link_to edit_user_registration_path, class: 'btn btn-success  btn-fab pull-right' do%>
+    <i class="material-icons">edit</i>
+<% end %>
+

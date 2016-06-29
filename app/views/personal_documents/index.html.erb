@@ -1,33 +1,47 @@
-<div class="jumbotron bg-inverse bg center-block">
+<div class="jumbotron bg-inverse bg center-block  p-b-0">
   <h1 class="">Documentos personales</h1>
 </div>
 <p id="notice"><%= notice %></p>
-<style>
-  .bg{
-    background: url("images/docus_bg.png") no-repeat top center fixed;
-    background-size: cover;
-    height: 10em;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white;
-  }
-</style>
-<div class="container m-t-3">
+
+<div class="container-fluid m-t-3 col-md-3 p-t-3 pull-left bg-light" >
+    <ul class="list-group">
+      <li class="list-group-item">
+          <%= link_to user_dashboard_path(@user) do %>
+              Mis datos
+          <% end %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to asistente_url do %>
+            Crear un documento
+        <% end %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to 'Documentos', documents_path %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to 'Documentos personales', personal_documents_path %>
+      </li>
+    </ul>
+</div>
+
+
+
+
+<div class="container m-t-3 p-b-3 col-md-9 pull-right">
 
   <div class="card">
-    <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: orange;',data: {js: 1} do %>
+    <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: #CDDC39;',data: {js: 1} do %>
         <%= sort_link(@q, :created_at, 'Fecha de creación', default_order: :desc) %>
         <%= sort_link(@q, :status, 'Estado', default_order: :desc) %>
     <% end %>
     <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
         <div class="form-group">
           <% if @user.administrador? %>
-              <%= f.label(:name_or_last_name_or_email_cont) %>
-          <%= f.search_field(:email_cont) %>
           <% end %>
-          <%= f.select(:status_eq, PersonalDocument.statuses, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
+          <%= f.select(:status_eq, PersonalDocument.statuses.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
           <%= link_to request.path, class: 'btn  btn-sm' do %>
               <i class="material-icons">clear</i>
           <% end %>
@@ -41,16 +55,15 @@
 
   </div>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-  <div class="card">
-    <%= area_chart @user.documents.all.group_by_minute(:created_at).count %>
+  <div class="card" style="position: realtive;">
     <% if !@user.administrador? %>
-        <%= pie_chart @user.personal_documents.all.group(:status).count, colors: ["blue", "orange"] %>
+        <%= pie_chart @user.personal_documents.all.group(:status).count.map { |k, v| [PersonalDocument.statuses.key(k).to_s.titleize, v] }%>
     <% else %>
-        <%= pie_chart PersonalDocument.all.group(:status).count, colors: ["blue", "orange"] %>
+        <%= pie_chart PersonalDocument.all.group(:status).count.map { |k, v| [PersonalDocument.statuses.key(k).to_s.titleize, v] } %>
     <% end %>
 
   </div>
-  <div class="list-group" style="z-index: 1;">
+  <div class="list-group card" style="z-index: 1;">
     <% @personal_documents.each do |personal_document| %>
         <div class="list-group-item">
           <div class="row-action-primary">
@@ -77,16 +90,13 @@
     <!-- /list-group -->
   </div>
 
-  <div class='row m-x-1 navbar-fixed-bottom pull-right'>
-    <ul class="nav nav-inline p-x-1 p-y-1">
-      <li class="nav nav-inline p-x-1">
-        <%= link_to new_personal_document_path, class: 'btn btn-danger  btn-fab pull-right' do%>
+  <div class='m-x-1 navbar-fixed-top pull-right'>
+        <%= link_to new_personal_document_path, class: 'btn btn-danger  btn-fab pull-right', style: 'margin-top: 4em;' do%>
             <i class="material-icons">note_add</i>
         <% end %>
-      </li>
-    </ul>
   </div>
 
+  <%= render 'layouts/bottom_menu' %>
 
 
 </div>

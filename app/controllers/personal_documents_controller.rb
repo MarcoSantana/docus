@@ -13,9 +13,10 @@ class PersonalDocumentsController < ApplicationController
     if @user.administrador? || @user.moderador?
       @q = PersonalDocument.ransack(params[:q])
     else
-      @q = @user.documents.ransack(params[:q])
+      @q = @user.personal_documents.ransack(params[:q])
     end
     @personal_documents = @q.result(distinct: true).page(params[:page]).per(10)
+
 
   end
 

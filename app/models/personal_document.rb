@@ -14,4 +14,8 @@ class PersonalDocument < Document
     type.to_s
   end
 
+  def status_data
+    @status_data
+  end
+
 end

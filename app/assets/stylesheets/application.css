@@ -13,3 +13,58 @@
  *= require_tree .
  *= require_self
  */
+.bg{
+    background: url("/images/docus_bg.png") no-repeat top center fixed;
+    background-size: cover;
+    height: 10em;
+    width: 100%;
+    margin: 0;
+    #margin-top: 58px;
+    padding: 0;
+    text-align: center;
+    color: white;
+}
+
+
+#wrapper {
+    position:absolute;
+    height:100%;
+    width:100%;
+}
+
+.panels {
+    position:relative;
+    min-height:50%;
+    width:100%;
+    z-index:1000;
+    background-color: white;
+}
+
+#header{
+    align-content: center;
+    background-color: #3F51B5;
+    position:fixed;
+    color:white;
+    top:0;
+    left:0;
+    /* prevents your fixed panel from being on top of your subsequent panels */
+    z-index: -99;
+}
+
+#b{
+    margin-top:18rem;
+}
+
+#name{
+    background-color: transparent;
+    color: white;
+    height: 5rem;
+    margin-top:15rem;
+    z-index: -99;
+
+}
+.usr_avatar{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

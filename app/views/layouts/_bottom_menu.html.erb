@@ -1,0 +1,46 @@
+<div class="navbar navbar-fixed-bottom pull-left" style="background-color: #653BB5">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-warning-collapse">
+        <i class="material-icons">menu</i>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse navbar-warning-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <%= link_to raw("<i class='material-icons'>home</i>"), 'user_dashboard' %>
+        </li>
+        <li>
+          <%= link_to 'Mis datos', 'user_dashboard' %>
+        </li>
+        <li>
+          <%= link_to 'Asistente de documento nuevo', 'asistente' %>
+        </li>
+        <li><a href="javascript:void(0)">Link</a></li>
+        <li class="dropdown">
+          <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Documentos
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Documentos</li>
+            <li>
+              <%= link_to 'Personal', personal_documents_path %>
+            </li>
+            <li>
+              <%= link_to 'Formación' %>
+            </li>
+            <li><a href="javascript:void(0)">Something else here</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Dropdown header</li>
+            <li>
+              <%= link_to 'Asistente de documento nuevo', 'asistente' %>
+            </li>
+            <li>
+              <%= link_to 'Mis datos', 'user_dashboard' %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
