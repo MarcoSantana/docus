@@ -43,6 +43,7 @@ gem 'active_median', '~> 0.1.0'
 gem 'ransack'
 #Multipart form (wizard)
 gem 'wicked'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :users
+resources :documents
+resources :titles
+resources :universities
+resources :personal_documents
+
+    root to: "users#index"
+  end
+
   resources :personal_steps
   resources :titles
   resources :universities
