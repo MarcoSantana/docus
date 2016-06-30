@@ -24,6 +24,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'paperclip'
 #document revision support
 gem 'paper_trail'

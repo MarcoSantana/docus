@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   #devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_for :users, controllers: {registration: 'registrations'} , :sign_out_via => [ :get, :post, :delete ]
 
+
   root to: 'home#index'
 
 end

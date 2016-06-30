@@ -1,36 +1,66 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- jumbotron -->
-<div class="jumbotron  navbar-dark bg-inverse img-rounded" style="background-color: darkred; background: url('images/docus_bg.png') no-repeat; background-size: cover;">
-  <div class='container text-sm-center p-t-3'>
-    <h1 class="display-2">Docus</h1>
-    <p class="lead">Sistema en línea de captura de docuemntos para certificación</p>
-  </div>
+<div class="jumbotron bg-inverse bg center-block">
+  <h1 class="display-2">Docus</h1>
+  <p class="lead">Sistema en línea de captura de docuemntos para certificación</p>
+  <nav class="navbar navbar-fixed-bottom">
+    <div class="container-fluid">
+
+      <ul class="nav navbar-nav">
+        <li><a href="#section1">¿Qué es Docus?</a></li>
+        <li><a href="#section2">Sistemas Libres computacionales</a></li>
+        <li><a href="#section3">Section 3</a></li>
+        <li>
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to('Salir de Docus', destroy_user_session_path, :method => :delete) %>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to('Entrar a Docus', new_user_session_path)  %>
+            </li>
+        <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 <!-- /jumbotron -->
-<div class="container">
+
+
+
+<div class="container body-bg">
   <!-- About -->
-  <div class="row">
-    <div class="col-lg-4 col-xl-push-4">
-      <h3 id="about" class="m-b-2">Sistemas Libres computacionales</h3>
-      <img class="img-fluid img-round hidden-xs-down " src="images/silico.png" alt="Silico Logo" />
-      <p>Sistemas Libres Computacionales</p>
-      <p>Somos especialistas en elaboración de soluciones para asistir en la evaluación de espacialistas médicos.</p>
-    </div>
-    <div class="col-lg-4 col-xl-pull-4">
-      <h3 class="m-b-2">¿Qué es Docus?</h3>
-      <p>Docus es un sistema de información en línea diseñado ex profeso para permitir a los aspirantes y al Consejo concentrar y administrar la información de los aspirantes de una manera práctica, sencilla y eficiente.</p>
-    </div>
-    <div class="col-md-4 col-xl-4">
-      <h3 class="m-b-2">Ventajas de docus</h3>
-      <div class="list-group">
-        <a href="#" class="list-group-item"><strong>Roles de usuario.</strong>  Facilita la administración y mejora la seguridad de la información</a>
-        <a href="#" class="list-group-item"><strong>Presencia en línea.</strong> Siempre disponible y a la mano</a>
-        <a href="#" class="list-group-item"><strong>Diseñado para móviles.</strong>  Interface optimizada para teléfonos inteligentes y tabletas
-</a>
-        <a href="#" class="list-group-item"><strong>Respaldo de datos en “la nube”</strong> Disponibilidad de la información en todo momento.</a>
-        <a href="#" class="list-group-item"><strong>Diseño amigable</strong> Sigue tendencias modernas de estética y funcionalidad orientadas a hacerlo agradable y fácil de usario</a>
-      </div>
+  <div id="section1" class="container-fluid">
+    <h3 class="m-b-2">¿Qué es Docus?</h3>
+    <p>Docus es un sistema de información en línea diseñado ex profeso para permitir a los aspirantes y al Consejo concentrar y administrar la información de los aspirantes de una manera práctica, sencilla y eficiente.</p>
+  </div>
+
+  <div id="section2" class="container-fluid">
+    <h3 class="m-b-2">Ventajas de docus</h3>
+    <div class="list-group">
+      <a href="#" class="list-group-item"><strong>Roles de usuario.</strong>  Facilita la administración y mejora la seguridad de la información</a>
+      <a href="#" class="list-group-item"><strong>Presencia en línea.</strong> Siempre disponible y a la mano</a>
+      <a href="#" class="list-group-item"><strong>Diseñado para móviles.</strong>  Interface optimizada para teléfonos inteligentes y tabletas
+      </a>
+      <a href="#" class="list-group-item"><strong>Respaldo de datos en “la nube”</strong> Disponibilidad de la información en todo momento.</a>
+      <a href="#" class="list-group-item"><strong>Diseño amigable</strong> Sigue tendencias modernas de estética y funcionalidad orientadas a hacerlo agradable y fácil de usario</a>
     </div>
   </div>
+
+  <div id="section3" class="container-fluid">
+    <h3 id="about" class="">
+      Sistemas Libres computacionales
+      <img class="img-responsive" src="/images/silico.png" alt="Silico Logo" />
+    </h3>
+    <p>Especialistas en elaboración de soluciones para asistir en la evaluación de espacialistas médicos.</p>
+  </div>
+
+
+
+
+
   <!-- /about -->
 
 </div>
