@@ -26,7 +26,8 @@
  development:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: docus_development
   pool: 5
-  username: marcosantana
-  password:
+  username: docus
+  password: b060
