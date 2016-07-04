@@ -1,42 +1,17 @@
-<div class="navbar navbar-fixed-top pull-left" style="background-color: #653BB5; height: 58px;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-warning-collapse">
-        <i class="material-icons">menu</i>
-      </button>
-    </div>
-    <div class="navbar-collapse collapse navbar-warning-collapse">
-      <ul class="nav navbar-nav">
-        <li class="">
-          <%= link_to raw("<small><i class='material-icons'>home</i></small>"), 'user_dashboard' %>
-        </li>
-        <li>
-          <%= link_to 'Asistente de documento nuevo', 'asistente' %>
-        </li>
-        <li class="dropdown">
-          <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Documentos
-          </a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">Documentos</li>
-            <li>
-              <%= link_to 'Personal', personal_documents_path %>
-            </li>
-            <li>
-              <%= link_to 'Formación' %>
-            </li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Dropdown header</li>
-            <li>
-              <%= link_to 'Asistente de documento nuevo', 'asistente' %>
-            </li>
-            <li>
-              <%= link_to 'Mis datos', 'user_dashboard' %>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+<div class="navbar navbar-fixed-top navbar-warning navbar-main">
+  <div class="nav navbar-warining">
+    <%= link_to root_path, class: 'navbar-link' do %>
+      <i class="material-icons hidden-md-up">home</i>
+      <i class="hidden-md-down">Inicio</i>
+    <% end %>
+    <%= link_to user_dashboard_path, class: 'navbar-link' do %>
+      <i class="material-icons hidden-md-up">account_circle</i>
+      <i class="hidden-md-down">Mis datos</i>
+    <% end %>
+    <%= link_to '/asistente', class: 'navbar-link' do %>
+      <i class="material-icons hidden-md-up">note_add</i>
+      <i class="hidden-md-down">Asistente</i>
+    <% end %>
   </div>
 
 </div>

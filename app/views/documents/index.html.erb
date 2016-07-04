@@ -1,112 +1,101 @@
-<div class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-warning-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <h4 class="text-inverted p-t-1"> <%= controller_name.titleize %></h4>
-    </div>
-    <div class="navbar-collapse collapse navbar-warning-collapse">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <%= search_form_for @q, class: 'form-inline' do |f| %>
-              <div class="input-group">
-                <%= f.search_field :description_cont, placeholder: 'Descripción contiene', class: 'form-control' %>
-                <span class="input-group-btn">
-              <%= button_tag( class: 'btn btn-default') do %>
-                    <i class="material-icons">search</i>
-              <% end %>
-                  <%= link_to request.path, class: 'btn btn-danger btn-sm' do %>
-                  <i class="material-icons">clear</i>
-                  <% end %>
-        </span>
+<div class="jumbotron bg-inverse bg center-block  p-b-0 m-t-3 p-t-3">
+  <h1 class="">Documentos</h1>
+</div>
 
-              </div>
+<div class="container-fluid m-t-3 col-md-3 p-t-3 pull-left bg-light" >
+  <ul class="list-group">
+    <li class="list-group-item">
+      <%= link_to user_dashboard_path(@user) do %>
+          Mis datos
+      <% end %>
+    </li>
+    <div class="list-group-separator"></div>
+    <li class="list-group-item">
+      <%= link_to asistente_url do %>
+          Crear un documento
+      <% end %>
+    </li>
+    <div class="list-group-separator"></div>
+    <li class="list-group-item">
+      <%= link_to 'Documentos', documents_path %>
+    </li>
+    <div class="list-group-separator"></div>
+    <li class="list-group-item">
+      <%= link_to 'Documentos personales', personal_documents_path %>
+    </li>
+  </ul>
+</div>
+
+
+
+
+<div class="container m-t-3 p-b-3 col-md-9 pull-right">
+
+  <div class="card">
+    <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: #CDDC39;',data: {js: 1} do %>
+        <%= sort_link(@q, :created_at, 'Fecha de creación', default_order: :desc) %>
+        <%= sort_link(@q, :status, 'Estado', default_order: :desc) %>
+    <% end %>
+    <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
+        <div class="form-group">
+          <% if @user.administrador? %>
+          <% end %>
+          <%= f.select(:status_eq, Document.statuses.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
+          <%= link_to request.path, class: 'btn  btn-sm' do %>
+              <i class="material-icons">clear</i>
+          <% end %>
+          <%= button_tag( class: 'btn btn-sm btn-success') do %>
+              <i class="material-icons">search</i>
           <% end %>
         </div>
-      </form>
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">filter_list</i></a>
-          <ul class="dropdown-menu">
-            <li><%= sort_link(@q, :description, 'Descripción', default_order: :desc ) %></li>
-            <li><%= sort_link(@q, :emission_date, 'Fecha de emisión', default_order: :desc ) %></li>
-          </ul>
-        </li>
-        <!--menu de documentos-->
-        <li class="dropdown nav-bar-right">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Crear documento</a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Dropdown header</li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
-            <li><a href="javascript:void(0)">One more separated link</a></li>
-          </ul>
-        </li>
-        <!-- /menu de documentos -->
-      </ul>
-      <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart">
-        <i class="material-icons">show_chart</i>
-      </button>
-      <ul class="nav navbar-nav">
-        <li><a href="javascript:void(0)"  data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart"><i class="material-icons">show_chart</i></a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="container m-t-3">
-  <div class="container form-field">
-
+    <% end %>
+    <%= paginate @documents %>
+    <%= page_entries_info @documents, :entry_name => 'documento' %>
 
   </div>
-  <div class="collapse" id="collapseChart">
-    <p class="card-text text-align-center">
-      <%= line_chart current_user.documents.all.group_by_day(:created_at, format: "%B %d, %Y").count, discrete: true %>
-    </p>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <div class="card" style="position: realtive;">
+    <% if !@user.administrador? %>
+        <%= pie_chart @user.documents.all.group(:status).count.map { |k, v| [Document.statuses.key(k).to_s.titleize, v] }%>
+    <% else %>
+        <%= pie_chart Document.all.group(:status).count.map { |k, v| [Document.statuses.key(k).to_s.titleize, v] } %>
+    <% end %>
+
   </div>
-
-
-  <div class="list-group">
+  <div class="list-group card" style="z-index: 1;">
     <% @documents.each do |document| %>
         <div class="list-group-item">
-          <%= link_to document do %>
-              <div class="row-action-primary">
+          <div class="row-action-primary">
+            <%= link_to document do %>
                 <%= image_tag document.image.url(:medium), class: 'card-img-top img-responsive' %>
-              </div>
-              <div class="row-content">
-                <div class="least-content">
-                  <span class="label label-danger"><i class="hidden-sm-down">Default</i></span>
-                </div>
-                <h4 class="list-group-item-heading"><%= document.to_s %></h4>
-                <p class="list-group-item-text"><%= document.description %></p>
-                <p class="list-group-item-text"> <%= link_to edit_document_path(document), class:'btn btn-sm btn-success' do %>
-                      <%= icon :pencil, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-                  <% end %>
-                  <%= link_to document, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-sm btn-danger' do %>
-                      <%= icon :trash, library: :font_awesome, class: 'fa', id: 'icon', data: {value: 1} %>
-                  <% end %></p>
-              </div>
-              </div>
-          <% end %>
-          <div class="list-group-separator"></div>
+            <% end %>
+          </div>
+          <div class="row-content">
+            <div class="least-content">
+              <%= render partial: 'status_label', locals: {document: document} %>
+            </div>
+            <h4 class="list-group-item-heading"><%= document.description.humanize %></h4>
+            <p class="list-group-item-text"><small><%= document.created_at %></small></p>
+            <% if @user.administrador? %>
+                <p class="list-group-item-text"><%= document.user.name %></p>
+            <% end %>
+            <% unless document.status == 'aceptado' %>
+                <p class="list-group-item-text"> <%= document.comentary %> </p>
+            <% end %>
+          </div>
+        </div>
+        <div class="list-group-separator"></div>
     <% end %>
     <!-- /list-group -->
   </div>
-  <div class='row m-b-0 navbar-fixed-bottom'>
-    <ul class="nav nav-inline p-x-1">
-      <li class="nav nav-inline p-x-1">
-        <%= link_to 'asistente', class: 'btn btn-danger  btn-fab pull-right m-b-1' do%>
-            <i class="material-icons">note_add</i>
-        <% end %>
-      </li>
-    </ul>
+
+  <div class='m-x-1 navbar-fixed-top pull-right'>
+    <%= link_to new_personal_document_path, class: 'btn btn-danger  btn-fab pull-right', style: 'margin-top: 4em;' do%>
+        <i class="material-icons">note_add</i>
+    <% end %>
   </div>
 
+  <%= render 'layouts/bottom_menu' %>
 
 
 </div>

@@ -30,3 +30,10 @@
   pool: 5
   username: marcosantana
   password:
+ production:
+   adapter: postgresql
+   encoding: unicode
+   database: dckit6qatc33ic
+   host: ec2-54-221-253-87.compute-1.amazonaws.com
+   user: akdqktkneuldkr
+   password: 3ay-in4jVzDp4a6tcHC4GhZBnY
