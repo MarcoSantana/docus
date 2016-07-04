@@ -28,8 +28,9 @@
   encoding: unicode
   database: docus_development
   pool: 5
-  username: marcosantana
-  password:
+  host: localhost
+  username: docus
+  password: b060
  production:
    adapter: postgresql
    encoding: unicode
