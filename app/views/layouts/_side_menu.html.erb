@@ -1,0 +1,23 @@
+<div class="container-fluid m-t-3 col-md-3 p-t-3 pull-left bg-light" >
+    <ul class="list-group">
+      <li class="list-group-item">
+          <%= link_to user_dashboard_path(@user) do %>
+              Mis datos
+          <% end %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to asistente_url do %>
+            Crear un documento
+        <% end %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to 'Documentos', documents_path %>
+      </li>
+      <div class="list-group-separator"></div>
+      <li class="list-group-item">
+        <%= link_to 'Documentos personales', personal_documents_path %>
+      </li>
+    </ul>
+</div>

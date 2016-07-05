@@ -36,32 +36,31 @@
   <title>Docus</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="-150">
-<!--
-<body id="home" data-spy="scroll" data-target=".navbar" data-offset="100">-->
+
 
   <!-- /navbar -->
 
   <!--Flash alerts -->
   <% flash.each do |key, value| %>
-      <div class="container p-b-3  m-l-3">
+      <div class="container p-b-3  m-y-3">
         <%= alert_box value, context: key %>
       </div>
   <% end %>
   <!--/flash alerts-->
 
-
+  <div class="container-fluid m-t-3">
     <%= yield  %>
+  </div>
 
 <!-- footer -->
  <% if user_signed_in? %>
-    <%= render 'layouts/bottom_menu' %>
+    <%= render 'layouts/top_menu' %>
 <% end %>
 
 
 <!-- /footer -->
 
 <!-- jQuery first, then Bootstrap JS.-->
-<%= javascript_include_tag "rails" %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.0.0/chartkick.min.js"></script>
@@ -73,7 +72,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-
 
 </body>
 </html>

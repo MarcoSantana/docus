@@ -1,0 +1,50 @@
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<nav class="navbar-fixed-top navbar-default m-b-3" data-no-turbolink>
+  <div class="nav pull-left p-t-1 text-muted">
+    <h4>Docus</h4>
+  </div>
+    <%= link_to raw('<i class="material-icons">help_outline</i>'), asistente_url, class: "navbar-link pull-right m-t-1" %>
+  <ul class="nav pull-right">
+  <!-- This works well for static text, like a username -->
+  <!-- Add any additional bootstrap header items.  This is a drop-down from an icon -->
+  <li class="dropdown pull-right">
+
+    <a href="#" data-toggle="dropdown" style="color:#777; margin-top: 5px;" class="dropdown-toggle"><i class="material-icons">account_circle</i></a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to user_dashboard_path, class: 'navbar-link' do %>
+          Mis datos
+        <% end %>
+      </li>
+      <li>
+        <%= link_to('Salir de Docus', destroy_user_session_path, :method => :delete, class: "navbar-link", data: { confirm: "¿Está seguro?" }) %>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul class="nav pull-right">
+<!-- This works well for static text, like a username -->
+<!-- Add any additional bootstrap header items.  This is a drop-down from an icon -->
+<li class="dropdown pull-right">
+  <a href="#" data-toggle="dropdown" style="color:#777; margin-top: 5px;" class="dropdown-toggle"><i class="material-icons">insert_drive_file</i></a>
+  <ul class="dropdown-menu">
+    <li>
+      <p class="text-muted">
+        Documentos
+      </p>
+      <hr />
+    </li>
+    <li>
+      <%= link_to 'Nuevo', asistente_url %>
+    </li>
+    <li>
+      <%= link_to 'Personal', personal_documents_path %>
+    </li>
+    <li>
+      <%= link_to 'Asistencia a eventos', personal_documents_path %>
+    </li>
+  </ul>
+  <%# TODO: Add a link for each kind of document aviable %>
+</li>
+</ul>
+</nav>

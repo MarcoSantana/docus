@@ -8,7 +8,7 @@
   <div class="navbar-fixed-top" id="name">
       <h2 class="">
         <%= current_user.compound_name %>
-        <%= link_to edit_user_registration_path, class: 'btn btn-success  btn-fab  pull-right' do%>
+        <%= link_to edit_user_registration_path, class: 'btn btn-success  btn-fab  pull-right' do %>
             <i class="material-icons">edit</i>
         <% end %>
       </h2>
@@ -27,8 +27,8 @@
 
     </div>
     <div class="card p-x-1">
-      <h3>Actividad por día</h3>
-      <%= line_chart current_user.documents.all.group_by_day(:created_at).count %>
+      <h3>Actividad por semana</h3>
+      <%= line_chart current_user.documents.all.group_by_week(:created_at).count %>
     </div>
   </div>
   <div id="c" class="panels">

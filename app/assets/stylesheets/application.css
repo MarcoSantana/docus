@@ -17,6 +17,7 @@ body {
     position: relative;
 }
 
+
 #section1 {padding-top:50px;height:100vh;color: #fff; background-color: #1E88E5;}
 #section2 {padding-top:50px;height:100vh;color: #fff; background-color: #673ab7;}
 #section3 {padding-top:50px;height:100vh;color: #fff; background-color: #ff9800;}
@@ -88,7 +89,7 @@ body {
     background-color: transparent;
     color: white;
     height: 5rem;
-    margin-top:15rem;
+    margin-top: 16rem;
     z-index: -99;
 
 }
