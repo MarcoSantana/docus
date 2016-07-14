@@ -3,6 +3,11 @@
   <div class="nav pull-left p-t-1 text-muted">
     <h4>Docus</h4>
   </div>
+    <!--Flash alerts -->
+    <% flash.each do |key, value| %>
+      <%= alert_box value, context: key %>
+    <% end %>
+    <!--/flash alerts-->
     <%= link_to raw('<i class="material-icons">help_outline</i>'), asistente_url, class: "navbar-link pull-right m-t-1" %>
   <ul class="nav pull-right">
   <!-- This works well for static text, like a username -->
@@ -41,7 +46,7 @@
       <%= link_to 'Personal', personal_documents_path %>
     </li>
     <li>
-      <%= link_to 'Asistencia a eventos', personal_documents_path %>
+      <%= link_to 'Actividad Académica', academic_activity_documents_path %>
     </li>
   </ul>
   <%# TODO: Add a link for each kind of document aviable %>

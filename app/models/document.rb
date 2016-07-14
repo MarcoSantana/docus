@@ -12,7 +12,7 @@ class Document < ActiveRecord::Base
 
 
   enum type: [:PersonalDocument,
-              :formación_profesional,
+              :AcademicActivityDocument,
               :constancia_de_actividad,
               :evento,
               :publicación

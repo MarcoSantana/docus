@@ -1,0 +1,71 @@
+<%= render partial: 'layouts/jumbotron', locals: {title: 'Actividad Académica'} %>
+<div class="container m-t-3 p-b-3">
+
+  <div class="card">
+    <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: #CDDC39;',data: {js: 1} do %>
+        <%= sort_link(@q, :created_at, 'Fecha de creación', default_order: :desc) %>
+        <%= sort_link(@q, :status, 'Estado', default_order: :desc) %>
+    <% end %>
+    <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
+        <div class="form-group">
+          <% if @user.administrador? %>
+
+          <% end %>
+          <%= f.select(:status_eq, AcademicActivityDocument.statuses.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
+          <%= f.select(:description_eq, AcademicActivityDocument.descriptions.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por tipo' ) %>
+          <%= link_to request.path, class: 'btn  btn-sm' do %>
+              <i class="material-icons">clear</i>
+          <% end %>
+          <%= button_tag( class: 'btn btn-sm btn-success') do %>
+              <i class="material-icons">search</i>
+          <% end %>
+        </div>
+    <% end %>
+    <%= paginate @academic_activity_documents %>
+    <%= page_entries_info @academic_activity_documents, :entry_name => 'documento' %>
+
+  </div>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <div class="card" style="position: realtive;">
+    <% if !@user.administrador? %>
+        <%= pie_chart @user.academic_activity_documents.all.group(:status).count.map { |k, v| [AcademicActivityDocument.statuses.key(k).to_s.titleize, v] }%>
+    <% else %>
+        <%= pie_chart academic_activity_documents.all.group(:status).count.map { |k, v| [AcademicActivityDocument.statuses.key(k).to_s.titleize, v] } %>
+    <% end %>
+
+  </div>
+  <div class="list-group card" style="z-index: 1;">
+    <% @academic_activity_documents.each do |academic_activity_document| %>
+        <div class="list-group-item">
+          <div class="row-action-primary">
+            <%= link_to academic_activity_document do %>
+                <%= image_tag academic_activity_document.image.url(:medium), class: 'card-img-top img-responsive' %>
+            <% end %>
+          </div>
+          <div class="row-content">
+            <div class="least-content">
+              <%= render partial: 'status_label', locals: {academic_activity_document: academic_activity_document} %>
+            </div>
+            <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %></h4>
+            <p class="list-group-item-text"><small><%= academic_activity_document.created_at %></small></p>
+            <% if @user.administrador? %>
+                <p class="list-group-item-text"><%= academic_activity_document.user.name %></p>
+                <% end %>
+            <% unless academic_activity_document.status == 'aceptado' %>
+                <p class="list-group-item-text"> <%= academic_activity_document.comentary %> </p>
+            <% end %>
+          </div>
+        </div>
+        <div class="list-group-separator"></div>
+    <% end %>
+    <!-- /list-group -->
+  </div>
+
+  <div class='m-x-1 navbar-fixed-top pull-right'>
+        <%= link_to new_academic_activity_document_path, class: 'btn btn-danger  btn-fab pull-right', style: 'margin-top: 4em;' do%>
+            <i class="material-icons">note_add</i>
+        <% end %>
+  </div>
+
+
+</div>

@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :academic_activity_document do
+    
+  end
   factory :personal_document do
     
   end

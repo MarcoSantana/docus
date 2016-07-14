@@ -43,7 +43,7 @@
   <!--Flash alerts -->
   <% flash.each do |key, value| %>
       <div class="container p-b-3  m-y-3">
-        <%= alert_box value, context: key %>
+        <%= alert_box value, dismissible: true, context: key %>
       </div>
   <% end %>
   <!--/flash alerts-->

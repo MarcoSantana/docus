@@ -16,6 +16,7 @@ resources :personal_documents
   resources :documents
   resources :universities
   resources :personal_document_steps, only: [:index, :show, :update]
+  resources :academic_activity_documents
 
 
   resources :personal_documents do

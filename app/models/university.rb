@@ -2,6 +2,7 @@ class University < ActiveRecord::Base
 
   has_many :titles
   has_many :users, through: :titles
+  # TODO:  has_many :academic_activity_documents
 
   enum level: [:licenciatura, :especialidad, :sub_especialidad, :maestría, :doctorado, :pos_doctorado, :educación_continua]
   University.eager_load(:titles)
