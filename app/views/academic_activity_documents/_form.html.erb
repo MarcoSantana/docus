@@ -15,6 +15,8 @@
           <%= image_tag @academic_activity_document.image.url, class: 'card-img-top img-fluid img-center p-a-3' %>
           <fieldset class="form-group">
             <%= f.select(:description, AcademicActivityDocument.descriptions.keys.map {|description| [description.titleize,description]}, label: 'Descripción del documento', class: 'form-control', include_blank: true ) %>
+            <%= label :issuer, 'Emisor del documento' %>
+            <%= collection_select :issuer, :issuer_ids,  Issuer.all, :id, :name,  {include_blank: true},{class: 'form-control', label: 'Emisor'} %>
 
             <% if current_user.role < 'aspirante' %>
                 <%= f.select(:status, AcademicActivityDocument.statuses.keys.map {|status| [status.titleize,status]}, class: 'form-control', include_blank: true ) %>

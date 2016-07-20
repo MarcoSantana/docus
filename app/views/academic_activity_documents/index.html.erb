@@ -46,14 +46,29 @@
             <div class="least-content">
               <%= render partial: 'status_label', locals: {academic_activity_document: academic_activity_document} %>
             </div>
-            <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %></h4>
-            <p class="list-group-item-text"><small><%= academic_activity_document.created_at %></small></p>
+            <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %> <small> <%= distance_of_time_in_words academic_activity_document.from, academic_activity_document.to %></small></h4>
+            <table class="table-hover">
+              <% academic_activity_document.issuers.each do |issuer| %>
+              <tr>
+                <td>
+                  <%= issuer.name %>
+                </td>
+              </tr>
+              <% end %>
+              <tr>
+                <td>
+                </td>
+              </tr>
+            </table>
+            <p class="list-group-item-text"></p>
             <% if @user.administrador? %>
                 <p class="list-group-item-text"><%= academic_activity_document.user.name %></p>
                 <% end %>
             <% unless academic_activity_document.status == 'aceptado' %>
                 <p class="list-group-item-text"> <%= academic_activity_document.comentary %> </p>
             <% end %>
+            <p class="list-group-item-text"><small><%= academic_activity_document.created_at %></small></p>
+
           </div>
         </div>
         <div class="list-group-separator"></div>

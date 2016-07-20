@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705230451) do
+ActiveRecord::Schema.define(version: 20160715215337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20160705230451) do
   end
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "documents_issuers", force: :cascade do |t|
+    t.integer "document_id"
+    t.integer "issuer_id"
+  end
+
+  add_index "documents_issuers", ["document_id"], name: "index_documents_issuers_on_document_id", using: :btree
+  add_index "documents_issuers", ["issuer_id"], name: "index_documents_issuers_on_issuer_id", using: :btree
+
+  create_table "issuers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "name_short"
+    t.boolean  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "titles", force: :cascade do |t|
     t.integer "user_id"

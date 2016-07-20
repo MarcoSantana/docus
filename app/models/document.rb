@@ -1,5 +1,8 @@
 class Document < ActiveRecord::Base
+
   belongs_to :user
+  has_and_belongs_to_many :issuers
+
   #has_paper_trail
 
 
@@ -35,6 +38,8 @@ class Document < ActiveRecord::Base
         'success'
     end
   end
+
+
 
 
 end

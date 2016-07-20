@@ -44,6 +44,8 @@ class AcademicActivityDocumentsController < ApplicationController
     def create
       @academic_activity_document = AcademicActivityDocument.new(academic_activity_document_params)
       @academic_activity_document.user_id= current_user.id
+      #@issuer = Issuer.find(params[:issuer][:id])
+      #@academic_activity_document.issuers << @issuer
 
 
       respond_to do |format|
@@ -94,7 +96,7 @@ class AcademicActivityDocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def academic_activity_document_params
-      params.fetch(:academic_activity_document, {}).permit(:certificate, :emission_date, :description, :image, :status, :comentary, :from, :to, :titles_attibutes => [:level], :users_attributes => [current_user])
+      params.fetch(:academic_activity_document, {}).permit(:certificate, :emission_date, :description, :image, :status, :comentary, :from, :to, :issuers_attibutes => [:id], :users_attributes => [current_user])
 
     end
 

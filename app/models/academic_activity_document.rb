@@ -1,7 +1,6 @@
 class AcademicActivityDocument < Document
-  belongs_to :user
-  # TODO: belongs_to :university
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: '/images/document_icon_default.png'
+
+ has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: '/images/document_icon_default.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   validates_presence_of :image
@@ -11,7 +10,7 @@ class AcademicActivityDocument < Document
   validate :date_cannot_be_in_the_future
   validate :to_cannot_be_before_from
 
-##Validations
+  ##Validations
   #Evita poner fechas sin sentido
   def date_cannot_be_in_the_future
    if from.present? && from.future?

@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :issues_document do
+    
+  end
+  factory :issuer do
+    name "MyString"
+    name_short "MyString"
+  end
   factory :academic_activity_document do
     
   end
