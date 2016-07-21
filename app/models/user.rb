@@ -1,16 +1,6 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  validates_uniqueness_of :email
-  #validates_presence_of :role
-  validates_presence_of :name
-  validates_presence_of :last_name
-
-
-
-
   has_many :documents
   has_many :personal_documents
   has_many :academic_activity_documents
@@ -19,6 +9,14 @@ class User < ActiveRecord::Base
   has_many :universities, through: :titles
 
   User.eager_load(:titles)
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  validates_uniqueness_of :email
+  #validates_presence_of :role
+  validates_presence_of :name
+  validates_presence_of :last_name
+
 
   #accepts_nested_attributes_for :universities
 
@@ -31,6 +29,34 @@ class User < ActiveRecord::Base
 
   def role_to_s
     role.humanize
+  end
+
+  def degree
+    titles.where(level: '0')
+  end
+
+  def specialty
+    titles.where(level: '1')
+  end
+
+  def sub_specialty
+    titles.where(level: '2')
+  end
+
+  def master
+    titles.where(level: '3')
+  end
+
+  def doctor
+    titles.where(level: '4')
+  end
+
+  def pos_doctor
+    titles.where(level: '5')
+  end
+
+  def continous
+    titles.where(level: '6')
   end
 
   enum role: [ :administrador, :moderador, :aspirante, :especialista, :invitado]

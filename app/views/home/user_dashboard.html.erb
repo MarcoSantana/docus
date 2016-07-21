@@ -6,16 +6,16 @@
   </div>
 
   <div class="navbar-fixed-top" id="name">
-      <h2 class="">
-        <%= current_user.compound_name %>
-        <%= link_to edit_user_registration_path, class: 'btn btn-success  btn-fab  pull-right' do %>
-            <i class="material-icons">edit</i>
-        <% end %>
-      </h2>
+    <h2 class="">
+      <%= current_user.compound_name %>
+      <%= link_to edit_user_registration_path, class: 'btn btn-success  btn-fab  pull-right' do %>
+          <i class="material-icons">edit</i>
+      <% end %>
+    </h2>
 
   </div>
 
-  <div id="b" class="panels card-group">
+  <div id="b" class="panels card-group p-x-0">
     <div class="card" style="background-color: white">
       <h3 class="p-x-1">Estado de documentos</h3>
       <% if !current_user.administrador? %>
@@ -26,17 +26,60 @@
       <p class="card-text">Total del documentos:<span class="badge"> <%= current_user.documents.all.count %></span></p>
 
     </div>
-    <div class="card p-x-1">
+    <div class="card">
       <h3>Actividad por semana</h3>
       <%= line_chart current_user.documents.all.group_by_week(:created_at).count %>
     </div>
   </div>
   <div id="c" class="panels">
     <div class="card">
-      <%= current_user.titles.each do |title| %>
-        title.inspect
+      <% if current_user.degree.any? %>
+          <div class="card-title">
+            <h4>Licenciatura</h4>
+          </div>
+          <% current_user.degree.each do |degree| %>
+              <p class="card-text">  <%= degree.university.name %></p>
+          <% end %>
       <% end %>
+      <% if current_user.specialty.any? %>
+          <div class="card-title">
+            <h4>Especialidad</h4>
+          </div>
+          <% current_user.specialty.each do |title| %>
+              <p class="card-text">  <%= title.university.name %></p>
+          <% end %>
+      <% end %>
+      <% if current_user.sub_specialty.any? %>
+
+          <div class="card-title">
+            <h4>Sub Especialidad</h4>
+          </div>
+          <% current_user.sub_specialty.each do |title| %>
+              <p class="card-text">  <%= title.university.name %></p>
+          <% end %>
+      <% end %>
+      <% if current_user.doctor.any? %>
+
+          <div class="card-title">
+            <h4>Doctorado</h4>
+          </div>
+          <% current_user.doctor.each do |title| %>
+              <p class="card-text">  <%= title.university.name %></p>
+          <% end %>
+      <% end %>
+
+      <% if current_user.pos_doctor.any? %>
+
+          <div class="card-title">
+            <h4>Pos Doctorado</h4>
+          </div>
+          <% current_user.pos_doctor.each do |title| %>
+              <p class="card-text">  <%= title.university.name %></p>
+          <% end %>
+      <% end %>
+
     </div>
+
   </div>
 
 </div>
