@@ -1,0 +1,1 @@
+Value = YAML.load_file("#{Rails.root}/config/document_value.yml")

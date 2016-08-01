@@ -38,7 +38,7 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     @document.user_id= current_user.id
-
+    if document_params['']
 
     respond_to do |format|
       if @document.save
@@ -87,7 +87,7 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.fetch(:document, {}).permit(:certificate, :emission_date, :description, :image, :titles_attibutes => [:level], :users_attributes => [current_user])
+      params.fetch(:document, {}).permit(:certificate, :emission_date, :description, :image, :titles_attibutes => [:level], :users_attributes => [@user])
 
     end
 end

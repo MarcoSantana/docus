@@ -30,7 +30,7 @@
     <% if !@user.administrador? %>
         <%= pie_chart @user.academic_activity_documents.all.group(:status).count.map { |k, v| [AcademicActivityDocument.statuses.key(k).to_s.titleize, v] }%>
     <% else %>
-        <%= pie_chart academic_activity_documents.all.group(:status).count.map { |k, v| [AcademicActivityDocument.statuses.key(k).to_s.titleize, v] } %>
+        <%= pie_chart AcademicActivityDocument.all.group(:status).count.map { |k, v| [AcademicActivityDocument.statuses.key(k).to_s.titleize, v] } %>
     <% end %>
 
   </div>
@@ -45,6 +45,9 @@
           <div class="row-content">
             <div class="least-content">
               <%= render partial: 'status_label', locals: {academic_activity_document: academic_activity_document} %>
+              Valor calculado provisional
+              <%= academic_activity_document.calculated_value %>
+
             </div>
             <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %> <small> <%= distance_of_time_in_words academic_activity_document.from, academic_activity_document.to %></small></h4>
             <table class="table-hover">

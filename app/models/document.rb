@@ -16,7 +16,7 @@ class Document < ActiveRecord::Base
 
   enum type: [:PersonalDocument,
               :AcademicActivityDocument,
-              :constancia_de_actividad,
+              :AssistanceActivityDocument,
               :evento,
               :publicación
              ]
@@ -39,7 +39,35 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def age
+    (((self.to - self.from))/365.0).round
+  end
 
+  def calculated_value
+    doc_val = Value[description]['pts_year'] * age
+    max_years = Value[description]['max_years'] * age
+    pts_year = Value[description]['pts_year'] * age
+
+    if age > max_years
+      return max_years * pts_year
+    end
+
+    return doc_val
+  end
+
+  ##Validations
+  #Evita poner fechas sin sentido
+  def date_cannot_be_in_the_future
+   if from.present? && from.future?
+     errors.add(:from, "no puede ser en el futuro")
+   end
+  end
+  #Evita poner fechas sin sentido
+  def to_cannot_be_before_from
+    if from.present? && to.present? && to < from
+      errors.add(:to, "no puede ser antes del inicio")
+    end
+  end
 
 
 end

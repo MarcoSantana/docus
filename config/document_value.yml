@@ -1,0 +1,39 @@
+#Este archivo está pensado para poner los valores de cada documento y sus valores máximos y mínimos
+#Aquí debe de ponerse el valor de dichos documentos ya que en la base de datos no varían pues se usan para calcular los valores del usuario y los cambios de valor de cada documento NO pueden ser retroactivos
+
+
+#Actividad Asistencial
+
+Médico_Adscrito_En_Hospital:
+  pts_year: 2
+  max_years: 5
+
+Jefe_de_Departamento:
+  pts_year: 1
+  max_years: 5
+
+Médico_Adscrito_En_Departamento:
+  pts_year: 1
+  max_years: 5
+
+#Actividad académica
+
+Profesor_de_Pregrado:
+  pts_year: 1
+  max_years: 5
+
+Profesor_de_Especialidad:
+  pts_year: 1
+  max_years: 5
+
+Profesor_de_Posgrado:
+  pts_year: 1
+  max_years: 5
+
+Asesor_de_Tesis:
+  pts_year: 1
+  max_years: 5
+
+Jefe_de_Enseñanza:
+  pts_year: 1
+  max_years: 5
