@@ -11,9 +11,9 @@ class AcademicActivityDocumentsController < ApplicationController
       #Si cargo como admin tengo que hcer eager loading de usuarios con documentos
       #estoy busando el default sort en rensack
       if @user.administrador? || @user.moderador?
-        @q = AcademicActivityDocument.ransack(params[:q])
+        @q = AcademicActivityDocument.contemporary.ransack(params[:q])
       else
-        @q = @user.academic_activity_documents.ransack(params[:q])
+        @q = @user.academic_activity_documents.order(to: :desc).ransack(params[:q])
       end
       @academic_activity_documents = @q.result(distinct: true).page(params[:page]).per(10)
 

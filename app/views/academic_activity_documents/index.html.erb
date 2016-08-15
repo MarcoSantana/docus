@@ -1,29 +1,16 @@
 <%= render partial: 'layouts/jumbotron', locals: {title: 'Actividad Académica'} %>
 <div class="container m-t-3 p-b-3">
 
-  <div class="card">
+  <div class="card" style="background-color: #889606;">
     <%= nav as: :tabs, id: '', class: 'bg-inverse', style:'background-color: #CDDC39;',data: {js: 1} do %>
         <%= sort_link(@q, :created_at, 'Fecha de creación', default_order: :desc) %>
         <%= sort_link(@q, :status, 'Estado', default_order: :desc) %>
     <% end %>
-    <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
-        <div class="form-group">
-          <% if @user.administrador? %>
 
-          <% end %>
-          <%= f.select(:status_eq, AcademicActivityDocument.statuses.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
-          <%= f.select(:description_eq, AcademicActivityDocument.descriptions.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por tipo' ) %>
-          <%= link_to request.path, class: 'btn  btn-sm' do %>
-              <i class="material-icons">clear</i>
-          <% end %>
-          <%= button_tag( class: 'btn btn-sm btn-success') do %>
-              <i class="material-icons">search</i>
-          <% end %>
-        </div>
-    <% end %>
+    <%= render 'document_filter_form' %>
     <%= paginate @academic_activity_documents %>
     <%= page_entries_info @academic_activity_documents, :entry_name => 'documento' %>
-
+	
   </div>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <div class="card" style="position: realtive;">
@@ -47,9 +34,14 @@
               <%= render partial: 'status_label', locals: {academic_activity_document: academic_activity_document} %>
               Valor calculado provisional
               <%= academic_activity_document.calculated_value %>
-
+              <%= link_to academic_activity_document do %>
+                <i class="material-icons">more_vert</i>
+              <% end %>
             </div>
-            <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %> <small> <%= distance_of_time_in_words academic_activity_document.from, academic_activity_document.to %></small></h4>
+            <h4 class="list-group-item-heading"><%= academic_activity_document.description.humanize %> <small> <%= academic_activity_document.period %></small>
+            </h4>
+            <%= render partial: 'layouts/validity_alert', locals: {document: academic_activity_document} %>
+
             <table class="table-hover">
               <% academic_activity_document.issuers.each do |issuer| %>
               <tr>

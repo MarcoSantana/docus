@@ -1,0 +1,7 @@
+<% unless document.validity? %>
+    <div class="alert alert-danger">
+      <strong>Este documento ya no es valido para este periodo de validación ya que caducó hace <%= (Time.now.year - document.to.year) %> años</strong>
+      <p><small> <%= link_to '¿Revisar documento?', document, class: 'alert-link' %></small></p>
+    </div>
+    <span class="text-danger">  </span>
+<% end %>

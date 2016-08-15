@@ -8,12 +8,16 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    if @user.administrador? || @user.moderador?
+    if @user.administrador? || @user.moderador? #Cambiar esto con un operador "<"
       @q = Document.ransack(params[:q])
     else
       @q = @user.documents.ransack(params[:q])
     end
     @documents = @q.result(distinct: true).page(params[:page]).per(10)
+
+    # unless params[:q]
+    #   @documents = @q.where(["documents.to < ?", 5.years.ago]).page(params[:page]).per(10)
+    # end
 
   end
 
@@ -26,7 +30,7 @@ class DocumentsController < ApplicationController
   def new
     @document = Document.new
     @title = Title.new
-    @document.user_id= current_user.id
+    @document.user_id= @user.id
   end
 
   # GET /documents/1/edit
@@ -38,8 +42,6 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     @document.user_id= current_user.id
-    if document_params['']
-
     respond_to do |format|
       if @document.save
         format.html { redirect_to @document, notice: 'Documento creado exitosamente' }

@@ -1,0 +1,17 @@
+    <%= search_form_for @q, url: {action: 'index'}, html: {class: 'form-inline p-x-1'} do |f| %>
+        <div class="form-group">
+          <% if @user.administrador? %>
+
+          <% end %>
+          <%= f.select(:status_eq, AcademicActivityDocument.statuses.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por estado' ) %>
+          <%= f.select(:description_eq, AcademicActivityDocument.descriptions.map{ |v, k| [v.to_s.titleize, k] }, class:'form-control', include_blank: true, prompt: 'Filtrar por tipo' ) %>
+          <%= f.label :contemporary, 'Solo documentos activos' %>
+          <%= f.check_box :contemporary, class: 'form-control' %>
+          <%= link_to request.path, class: 'btn  btn-sm' do %>
+              <i class="material-icons">clear</i>
+          <% end %>
+          <%= button_tag( class: 'btn btn-sm btn-success') do %>
+              <i class="material-icons">search</i>
+          <% end %>
+        </div>
+    <% end %>
